@@ -7,9 +7,10 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.3/simple-lightbox.min.css" integrity="sha512-go9fGIVISQ40zPFKqsnRilS+UYl5wOOKLwykP5eu2f2Nn52A6f/2/S/j1r9I+N66yPLT/K/9o9mPYv/nS2r9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
+    </head>
         body {
             font-family: 'Inter', sans-serif;
             box-sizing: border-box;
@@ -145,10 +146,12 @@
             Diferentes visualizaciones generadas por el script, mostrando layouts alternativos (Circular vs. Kamada-Kawai) y estilos de color (Monocromático vs. Clusters).
         </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gallery">
             
             <div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
-                <img src="red/analisis_red_colorida_Kamada.png" alt="Red colorida Kamada" class="rounded-md w-full shadow-lg">
+                <a href="red/analisis_red_colorida_Kamada.png">
+                    <img src="red/analisis_red_colorida_Kamada.jpg" alt="Red colorida Kamada" class="rounded-md w-full shadow-lg">
+                </a>
                 <p class="text-center text-gray-400 text-sm mt-2 font-medium">Colorido por Clusters (Layout Kamada)</p>
             </div>
 
@@ -471,6 +474,7 @@ if __name__ == "__main__":
             </div>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.3/simple-lightbox.min.js" integrity="sha512-jEJn/sB1AAqF/3Bw/sxy33m2w3Q6c09bTj6s0QnB1iY/v2iQGLjUu9vD/mIY21+Pn9sE/i/g1NqT/sJ/OnXgA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
