@@ -59,21 +59,25 @@
         .text-glow {
             text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
         }
+
+        /* Estilo simple para el bloque de código */
+        pre code {
+            font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body class="bg-gray-900 min-h-screen text-gray-300">
-    <!-- Header -->
     <header class="bg-gray-900/80 backdrop-blur-lg shadow-lg shadow-cyan-500/5 sticky top-0 z-50">
         <nav class="max-w-6xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="text-xl font-bold text-white">Dr. Juan Carlos Teran Briceno</a>
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="#education" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Formação</a>
                     <a href="#employment" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Experiência</a>
                     <a href="#achievements" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Conquistas</a>
                     
-                    <!-- Dropdown Menu -->
                     <div class="relative group">
                         <button class="text-gray-400 hover:text-cyan-400 font-medium transition-colors inline-flex items-center">
                             <span>Disciplinas</span>
@@ -83,16 +87,13 @@
                         </button>
                         <div class="absolute left-1/2 -translate-x-1/2 z-10 w-48 hidden group-hover:block bg-gray-800 rounded-md shadow-lg mt-2 border border-gray-700">
                             <div class="py-1">
-                                <a href="https://github.com/juanfisicobr/Red-coocurrencia-terminos" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Analise de Redes</a>
+                                <a href="analise_rede.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Analise de Redes</a>
                                 <a href="https://youtu.be/oVfLj2JfQEw?si=jXKPIU2XHj0UH7m0" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Bibliometria</a>
                             </div>
                         </div>
                     </div>
-                    <!-- End Dropdown -->
-
                     <a href="#contact" class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all">Contato</a>
                 </div>
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -100,7 +101,6 @@
                 </div>
             </div>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Formação</a>
@@ -112,7 +112,7 @@
                         <svg class="w-5 h-5 transform transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                     <div id="mobile-disciplinas-menu" class="hidden mt-1 pl-4">
-                        <a href="https://github.com/juanfisicobr/Red-coocurrencia-terminos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Analise de Redes</a>
+                        <a href="analise_rede.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Analise de Redes</a>
                         <a href="https://youtu.be/oVfLj2JfQEw?si=jXKPIU2XHj0UH7m0" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Bibliometria</a>
                     </div>
                 </div>
@@ -122,10 +122,8 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-6 py-12">
-        <!-- Hero Section -->
         <section class="text-center mb-20 fade-in">
             <div class="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 section-card border border-gray-700">
-                <!-- Foto de Perfil Adicionada -->
                 <img src="img\juanfoto.png" alt="Foto de perfil de Dr. Juan Carlos Teran Briceno" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover border-4 border-gray-600 shadow-lg -mt-24">
                 
                 <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-2 text-glow">Dr. Juan Carlos Teran Briceno</h1>
@@ -134,7 +132,6 @@
                     Com vasta experiência internacional em ensino e pesquisa, dedico-me a explorar as intersecções entre física, tecnologia e metodologias educacionais inovadoras.
                 </p>
                 
-                <!-- Links Sociais/Profissionais -->
                 <div class="flex justify-center items-center space-x-4">
                     <a href="https://www.linkedin.com/in/juan-teran-briceno-71556758" target="_blank" class="text-gray-400 hover:text-cyan-400 transition-colors" title="LinkedIn">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
@@ -152,7 +149,6 @@
             </div>
         </section>
 
-        <!-- Education Section -->
         <section id="education" class="mb-16 fade-in">
             <div class="bg-gray-800 rounded-2xl shadow-xl p-8 section-card border border-gray-700">
                 <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
@@ -205,7 +201,6 @@
             </div>
         </section>
 
-        <!-- Employment Section -->
         <section id="employment" class="mb-16 fade-in">
             <div class="bg-gray-800 rounded-2xl shadow-xl p-8 section-card border border-gray-700">
                 <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
@@ -252,7 +247,6 @@
             </div>
         </section>
 
-        <!-- Achievements Section -->
         <section id="achievements" class="mb-16 fade-in">
             <div class="bg-gray-800 rounded-2xl shadow-xl p-8 section-card border border-gray-700">
                 <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
@@ -264,25 +258,25 @@
                         <h4 class="text-xl font-semibold text-white mb-4">Prêmios</h4>
                         <div class="space-y-4">
                            <div class="bg-gray-700/50 p-4 rounded-lg">
-                               <span class="text-cyan-400 font-medium text-sm">2018</span>
-                               <p class="font-semibold text-white">Programa de Incentivo ao Pesquisador (PEI 2018-2019)</p>
-                               <p class="text-gray-400 text-sm">CDCHTA/ULA, Venezuela</p>
+                                <span class="text-cyan-400 font-medium text-sm">2018</span>
+                                <p class="font-semibold text-white">Programa de Incentivo ao Pesquisador (PEI 2018-2019)</p>
+                                <p class="text-gray-400 text-sm">CDCHTA/ULA, Venezuela</p>
                            </div>
                            <div class="bg-gray-700/50 p-4 rounded-lg">
-                               <span class="text-cyan-400 font-medium text-sm">2015</span>
-                               <p class="font-semibold text-white">Programa de Incentivo à Inovação e Pesquisa (PEII 2015-2017)</p>
-                               <p class="text-gray-400 text-sm">ONCTI-MPPEUCT, Venezuela</p>
+                                <span class="text-cyan-400 font-medium text-sm">2015</span>
+                                <p class="font-semibold text-white">Programa de Incentivo à Inovação e Pesquisa (PEII 2015-2017)</p>
+                                <p class="text-gray-400 text-sm">ONCTI-MPPEUCT, Venezuela</p>
                            </div>
                            <div class="bg-gray-700/50 p-4 rounded-lg">
-                               <span class="text-cyan-400 font-medium text-sm">2015</span>
-                               <p class="font-semibold text-white">Programa de Incentivo ao Pesquisador (PEI 2015-2017)</p>
-                               <p class="text-gray-400 text-sm">CDCHTA/ULA, Venezuela</p>
+                                <span class="text-cyan-400 font-medium text-sm">2015</span>
+                                <p class="font-semibold text-white">Programa de Incentivo ao Pesquisador (PEI 2015-2017)</p>
+                                <p class="text-gray-400 text-sm">CDCHTA/ULA, Venezuela</p>
                            </div>
                             <div class="bg-gray-700/50 p-4 rounded-lg">
-                                <span class="text-cyan-400 font-medium text-sm">2012-2014</span>
-                               <p class="font-semibold text-white">Múltiplos Programas de Incentivo</p>
-                               <p class="text-gray-400 text-sm">CDCHTA/ULA e ONCTI-MPPEUCT, Venezuela</p>
-                           </div>
+                                 <span class="text-cyan-400 font-medium text-sm">2012-2014</span>
+                                <p class="font-semibold text-white">Múltiplos Programas de Incentivo</p>
+                                <p class="text-gray-400 text-sm">CDCHTA/ULA e ONCTI-MPPEUCT, Venezuela</p>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -320,7 +314,6 @@
         </section>
     </main>
 
-    <!-- Footer / Contact Section -->
     <footer id="contact" class="bg-black py-12">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <h3 class="text-3xl font-bold text-white text-glow mb-4">Entre em Contato</h3>
@@ -376,8 +369,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
