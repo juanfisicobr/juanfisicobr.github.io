@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes - Análise de Rede</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        /* Estilos copiados para consistencia */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: #22d3ee; /* cyan-400 */
+            border-radius: 50%;
+            border: 3px solid #1f2937; /* gray-800 */
+            box-shadow: 0 0 0 3px #4b5563; /* gray-600 */
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: -1px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: #374151; /* gray-700 */
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0,0,0,0.2);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+        }
+
+        /* Estilo para el bloque de código */
+        pre code {
+            font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #e5e7eb; /* gray-200 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen text-gray-300">
+    <header class="bg-gray-900/80 backdrop-blur-lg shadow-lg shadow-cyan-500/5 sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold text-white">Dr. Juan Carlos Teran Briceno</a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html#education" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Formação</a>
+                    <a href="index.html#employment" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Experiência</a>
+                    <a href="index.html#achievements" class="text-gray-400 hover:text-cyan-400 font-medium transition-colors">Conquistas</a>
+                    
+                    <div class="relative group">
+                        <button class="text-gray-400 hover:text-cyan-400 font-medium transition-colors inline-flex items-center">
+                            <span>Disciplinas</span>
+                            <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="absolute left-1/2 -translate-x-1/2 z-10 w-48 hidden group-hover:block bg-gray-800 rounded-md shadow-lg mt-2 border border-gray-700">
+                            <div class="py-1">
+                                <a href="analise_rede.html" class="block px-4 py-2 text-sm text-cyan-400 bg-gray-700 hover:text-white">Analise de Redes</a>
+                                <a href="https://youtu.be/oVfLj2JfQEw?si=jXKPIU2XHj0UH7m0" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Bibliometria</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="index.html#contact" class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all">Contato</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Formação</a>
+                <a href="index.html#employment" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Experiência</a>
+                <a href="index.html#achievements" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Conquistas</a>
+                <div>
+                    <button id="mobile-disciplinas-button" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">
+                        <span>Disciplinas</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <div id="mobile-disciplinas-menu" class="hidden mt-1 pl-4">
+                        <a href="analise_rede.html" class="block px-3 py-2 rounded-md text-base font-medium text-cyan-400 bg-gray-700 hover:text-white">Analise de Redes</a>
+                        <a href="https://youtu.be/oVfLj2JfQEw?si=jXKPIU2XHj0UH7m0" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Bibliometria</a>
+                    </div>
+                </div>
+                <a href="index.html#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Contato</a>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <section class="mb-16 fade-in">
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 section-card border border-gray-700">
+                
+                <a href="index.html" class="text-cyan-400 hover:text-cyan-300 transition-colors mb-6 inline-block">&larr; Volver ao Perfil</a>
+
+                <h3 class="text-3xl font-bold text-white mb-4 text-glow">Análisis de Rede de Co-ocorrência de Termos</h3>
+                <p class="text-lg text-gray-400 mb-8">
+                    Este script de Python utiliza as bibliotecas Pandas, NetworkX e Matplotlib para construir, analisar e visualizar uma rede de co-ocorrência de termos a partir de um arquivo de texto. O processo inclui pré-processamento de texto em espanhol, cálculo de métricas de rede (PageRank, clusters) e um fluxo interativo para corrigir acentuação antes de gerar o gráfico final.
+                </p>
+
+                <h4 class="text-2xl font-semibold text-white mb-6">Gráfico Gerado (Monocromático)</h4>
+                <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 mb-8">
+                    <img src="analisis_red_monocromatica.png" alt="Gráfico da análise de rede" class="rounded-lg shadow-lg mx-auto border border-gray-600">
+                </div>
+
+                <h4 class="text-2xl font-semibold text-white mb-6">Script Python Completo</h4>
+                <div class="bg-gray-900 border border-gray-700 rounded-lg p-4 overflow-x-auto">
+<pre><code class="language-python">
+import pandas as pd
+import networkx as nx
+import re
+from itertools import combinations
+import community as community_louvain
+import matplotlib.pyplot as plt
+import unicodedata # Para eliminar tildes
+import numpy as np # Para normalizar
+
+# --- Función para eliminar tildes ---
+def _eliminar_tildes(texto):
+    nfkd_form = unicodedata.normalize('NFD', texto)
+    return "".join([c for c in nfkd_form if unicodedata.category(c) != 'Mn'])
+
+# --- Función de Preprocesamiento (Español) ---
+def preprocess_text(text, custom_stopwords=None):
+    mapa_normalizacao = {
+        'investigaciones': 'investigacion',
+        'docentes': 'docente',
+        'estudiantes': 'estudiante',
+        'sociales': 'social',
+        'educacionales': 'educacional',
+        'nacionales': 'nacional',
+        'regionales': 'regional',
+        'locales': 'local',
+        'institucionales': 'institucional',
+        'profesionales': 'profesional',
+        'populares': 'popular',
+        'municipales': 'municipal',
+        'politicas': 'politica', # 'políticas' se vuelve 'politica'
+        'acciones': 'accion',    # 'acción' se vuelve 'accion'
+        'redes': 'red',
+        'universidades': 'universidad'
+    }
+    stop_words = set(['de', 'a', 'o', 'que', 'y', 'e', 'el', 'la', 'en', 'un', 'una', 'para',
+        'con', 'no', 'los', 'las', 'por', 'mas', 'más', 'se', 'su', 'sus',
+        'como', 'pero', 'al', 'del', 'le', 'lo', 'me', 'mi', 'sin', 'son',
+        'tambien', 'también', 'este', 'esta', 'estos', 'estas', 'ser', 'es'])
+    
+    if custom_stopwords:
+        # Normalizar también las stopwords personalizadas
+        normalized_custom = [_eliminar_tildes(sw.lower()) for sw in custom_stopwords]
+        stop_words.update(normalized_custom)
+
+    text = text.lower()
+    text = _eliminar_tildes(text) # <-- PASO CLAVE
+    text = re.sub(r'[^\w\s]', '', text)
+    text = re.sub(r'\d+', '', text)
+    tokens = text.split()
+    normalized_tokens = [mapa_normalizacao.get(token, token) for token in tokens]
+    filtered_tokens = [word for word in normalized_tokens if word not in stop_words and len(word) > 2]
+    return filtered_tokens
+
+# --- Función de Creación de Matriz ---
+def create_cooccurrence_matrix_from_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
+        content = file.read()
+    documents_raw = content.split('###')
+    documents_raw = [doc.strip() for doc in documents_raw if doc.strip()]
+    
+    # Esta lista ahora se pasa desde el bloque principal, pero la dejamos aquí como ejemplo
+    # custom_stopwords = ['programa', 'educacion', 'pdi', 'art', 'articulo'] 
+    
+    # Pasamos una lista vacía de stopwords personalizadas, ya que se definen en el bloque principal
+    processed_docs = [preprocess_text(doc, []) for doc in documents_raw]
+    
+    vocabulary = sorted(list(set(term for doc in processed_docs for term in doc)))
+    M = pd.DataFrame(0, index=vocabulary, columns=vocabulary, dtype=int)
+    
+    for doc in processed_docs:
+        unique_terms_in_doc = sorted(list(set(doc)))
+        for term in unique_terms_in_doc:
+            M.loc[term, term] += 1
+        for term1, term2 in combinations(unique_terms_in_doc, 2):
+            M.loc[term1, term2] += 1
+            M.loc[term2, term1] += 1
+    return M
+
+# --- Función de Métricas ---
+def calcular_e_associar_metricas(G, M):
+    partition = community_louvain.best_partition(G, weight='weight')
+    pagerank = nx.pagerank(G, weight='weight')
+    occurrences = {term: M.loc[term, term] for term in G.nodes()}
+    clusters_ajustados = {node: cluster_id + 1 for node, cluster_id in partition.items()}
+    nx.set_node_attributes(G, clusters_ajustados, 'cluster')
+    nx.set_node_attributes(G, pagerank, 'pagerank')
+    nx.set_node_attributes(G, occurrences, 'occurrences')
+    print("Métricas (Cluster, PageRank, Ocorrencias) calculadas y asociadas a los nodos.")
+    return G
+
+# --- Función de Filtrado ---
+def filtrar_rede(G, top_n, min_edge_weight_for_viz):
+    if G.number_of_nodes() &lt;= top_n: # <-- HTML escape para <
+        top_nodes = list(G.nodes())
+    else:
+        pagerank_dict = nx.get_node_attributes(G, 'pagerank')
+        sorted_nodes = sorted(pagerank_dict, key=pagerank_dict.get, reverse=True)
+        top_nodes = sorted_nodes[:top_n]
+        
+    G_sub = G.subgraph(top_nodes).copy()
+    G_final = nx.Graph()
+    G_final.add_nodes_from(G_sub.nodes(data=True))
+    
+    for u, v, data in G_sub.edges(data=True):
+        if data['weight'] &gt;= min_edge_weight_for_viz: # <-- HTML escape para >
+            G_final.add_edge(u, v, weight=data['weight'])
+            
+    G_final.remove_nodes_from(list(nx.isolates(G_final)))
+    print(f"Red final (Top {top_n} nodos, Bordes >= {min_edge_weight_for_viz}): {G_final.number_of_nodes()} nodos, {G_final.number_of_edges()} bordes.")
+    return G_final
+
+# --- Función de Visualización (Monocromática) ---
+def visualizar_rede(G, title, output_filename):
+    if G.number_of_nodes() == 0:
+        print("La red está vacía. No es posible generar el gráfico.")
+        return
+
+    plt.figure(figsize=(16, 9))
+    pos = nx.kamada_kawai_layout(G)
+
+    pagerank_values = [data.get('pagerank', 0) for _, data in G.nodes(data=True)]
+
+    # Lógica de Tamaño
+    min_size = 1500
+    max_size = 16000
+    node_sizes = []
+    if pagerank_values:
+        min_pr = min(pagerank_values)
+        max_pr = max(pagerank_values)
+        if max_pr == min_pr:
+            node_sizes = [min_size] * G.number_of_nodes()
+        else:
+            node_sizes = [
+                min_size + ((p - min_pr) / (max_pr - min_pr)) * (max_size - min_size) 
+                for p in pagerank_values
+            ]
+    else:
+        node_sizes = [min_size] * G.number_of_nodes()
+
+    # Lógica de Color (Monocromático)
+    try:
+        cmap_color = plt.colormaps.get_cmap('Blues_r')
+    except AttributeError:
+        cmap_color = plt.cm.get_cmap('Blues_r')
+    
+    # Lógica de Grosor de Línea
+    edge_weights = [data['weight'] for u, v, data in G.edges(data=True)]
+    base_width = 1.0
+    max_extra_width = 6.0
+    scaled_widths = []
+    if edge_weights:
+        min_w = min(edge_weights)
+        max_w = max(edge_weights)
+        if max_w == min_w:
+            scaled_widths = [base_width] * len(edge_weights)
+        else:
+            scaled_widths = [
+                base_width + (((w - min_w) / (max_w - min_w)) * max_extra_width) 
+                for w in edge_weights
+            ]
+    else:
+        scaled_widths = [base_width] * len(edge_weights)
+
+    # Lógica de Etiquetas
+    custom_labels = {
+        node: f"{node.capitalize()}\n({data.get('occurrences', '?')})"
+        for node, data in G.nodes(data=True)
+    }
+
+    # Dibujar Nodos
+    nx.draw_networkx_nodes(
+        G, pos,
+        node_color=pagerank_values,
+        cmap=cmap_color,
+        node_size=node_sizes,
+        alpha=0.8,
+        edgecolors='black',
+        linewidths=1.5
+    )
+
+    # Dibujar Aristas
+    nx.draw_networkx_edges(
+        G, pos, 
+        alpha=0.3, 
+        width=scaled_widths,
+        edge_color='grey'
+    )
+    
+    # Dibujar Etiquetas
+    nx.draw_networkx_labels(G, pos, labels=custom_labels, font_size=12, font_color='black', font_weight='bold')
+
+    plt.title(title, size=20)
+    plt.tight_layout()
+    plt.savefig(output_filename, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"\nGráfico '{output_filename}' guardado con éxito! (Monocromático y grosor dinámico)")
+
+
+## ----------------------------------------------------------------
+## BLOQUE DE EJECUCIÓN PRINCIPAL (CON PASO DE EDICIÓN)
+## ----------------------------------------------------------------
+if __name__ == "__main__":
+
+    # --- Parámetros de Entrada ---
+    FILE_PATH = 'extractos.txt'
+    TOP_N_NODES = 20
+    MIN_EDGE_WEIGHT_VIZ = 5 
+    GRAFICO_TITULO = "Análisis de Red (Monocromático)"
+    GRAFICO_OUTPUT_FILE = "analisis_red_monocromatica.png"
+    MAPEO_ETIQUETAS_FILE = 'mapeo_terminos.csv'
+
+    # --- 1. Flujo de trabajo estándar (hasta el filtrado) ---
+    print("Iniciando análisis...")
+    matriz_M = create_cooccurrence_matrix_from_file(FILE_PATH)
+    grafo_base = nx.from_pandas_adjacency(matriz_M)
+    grafo_com_metricas = calcular_e_associar_metricas(grafo_base, matriz_M)
+    grafo_final = filtrar_rede(grafo_com_metricas, top_n=TOP_N_NODES, min_edge_weight_for_viz=MIN_EDGE_WEIGHT_VIZ)
+
+    # --- 2. Exportar nodos para corrección de tildes ---
+    nodos_sin_tildes = list(grafo_final.nodes())
+    df_mapa = pd.DataFrame({
+        'original_sin_tilde': nodos_sin_tildes,
+        'corregido_con_tilde': nodos_sin_tildes
+    })
+    df_mapa.to_csv(MAPEO_ETIQUETAS_FILE, index=False, encoding='utf-8-sig')
+
+    # --- 3. Pausa para la edición manual ---
+    print("-" * 70)
+    print(f"ARCHIVO CREADO: '{MAPEO_ETIQUETAS_FILE}'")
+    print("Por favor, abre este archivo CSV (con Excel, Google Sheets, o un editor de texto).")
+    print("Modifica la columna 'corregido_con_tilde' para añadir las tildes necesarias.")
+    print("-" * 70)
+    input(">>> PRESIONA ENTER para continuar después de guardar tus cambios... ")
+
+    # --- 4. Importar mapa corregido y re-etiquetar ---
+    print("Leyendo el archivo de etiquetas corregido...")
+    try:
+        df_mapa_editado = pd.read_csv(MAPEO_ETIQUETAS_FILE, encoding='utf-8-sig')
+    except Exception as e:
+        print(f"Error leyendo el archivo {MAPEO_ETIQUETAS_FILE}: {e}")
+        print("Asegúrate de que el archivo esté guardado correctamente.")
+        # exit() # Comentado para que no detenga el script si se usa en un entorno no interactivo
+
+    mapa_de_etiquetas = pd.Series(
+        df_mapa_editado.corregido_con_tilde.values,
+        index=df_mapa_editado.original_sin_tilde
+    ).to_dict()
+
+    grafo_etiquetado = nx.relabel_nodes(grafo_final, mapa_de_etiquetas, copy=True)
+    print("Nodos re-etiquetados con éxito.")
+
+    # --- 5. Visualización ---
+    visualizar_rede(
+        grafo_etiquetado,
+        GRAFICO_TITULO, 
+        GRAFICO_OUTPUT_FILE
+    )
+
+</code></pre>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    <footer id="contact" class="bg-black py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold text-white text-glow mb-4">Entre em Contato</h3>
+            <p class="text-gray-400 mb-6 max-w-lg mx-auto">Sinta-se à vontade para entrar em contato para colaborações, palestras ou outras oportunidades profissionais.</p>
+            <a href="mailto:juanfisico23@furg.br" class="inline-block bg-cyan-500 text-white px-6 py-3 rounded-lg hover:bg-cyan-600 transition-all text-lg font-semibold shadow-lg shadow-cyan-500/20">
+                Enviar E-mail
+            </a>
+            <div class="mt-8 border-t border-gray-700 pt-8">
+                <p class="text-gray-500">© 2024 Dr. Juan Carlos Teran Briceno</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+    
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+    
+            // Mobile dropdown toggle for Disciplinas
+            const mobileDisciplinasButton = document.getElementById('mobile-disciplinas-button');
+            const mobileDisciplinasMenu = document.getElementById('mobile-disciplinas-menu');
+            const mobileDisciplinasArrow = mobileDisciplinasButton.querySelector('svg');
+    
+            mobileDisciplinasButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default button behavior
+                mobileDisciplinasMenu.classList.toggle('hidden');
+                mobileDisciplinasArrow.classList.toggle('rotate-180');
+            });
+        });
+    </script>
+</body>
+</html>
