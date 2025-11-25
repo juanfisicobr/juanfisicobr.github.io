@@ -394,8 +394,6 @@ df_long = df_clean
 for col in cols_interesse:
     df_long = df_long.explode(col)
 
-# --- A CORREÇÃO PRINCIPAL ESTÁ NESTA LINHA ABAIXO ---
-# Resetamos o índice para garantir que cada linha tenha um ID único (0, 1, 2...)
 df_long.reset_index(drop=True, inplace=True)
 # ----------------------------------------------------
 
