@@ -51,25 +51,27 @@ function escapeRegExp(string) {
 function applyHighlights(text, urName, searchTerm) {
     let highlighted = text;
 
-    // Primeiro destaque: Unidade de Registro (UR) - Amarelo
+    // 1. Destaque da Unidade de Registro (UR)
     if (urName) {
         const keywords = urName.split(/[\s()\/,.\-]+/).filter(w => w.length > 3);
         if (keywords.length > 0) {
-            const urRegex = new RegExp(`(${keywords.join('|')})`, 'gi');
-            highlighted = highlighted.replace(urRegex, '<span class="hl-ur">$1</span>');
+            // Removidos os parênteses extras do RegExp para não criar grupos de captura
+            const urRegex = new RegExp(keywords.join('|'), 'gi');
+            highlighted = highlighted.replace(urRegex, '<span class="hl-ur">$&</span>');
         }
     }
 
-    // Segundo destaque: Busca Global do Usuário - Laranja
+    // 2. Destaque da Busca Global
     if (searchTerm && searchTerm.length > 2) {
         const safeSearch = escapeRegExp(searchTerm);
-        const searchRegex = new RegExp(`(${safeSearch})`, 'gi');
+        // RegExp sem parênteses para manter a assinatura (match, offset, originalText)
+        const searchRegex = new RegExp(safeSearch, 'gi');
         
-        // Esta função evita destacar termos que já estão dentro de uma tag HTML
-        highlighted = highlighted.replace(searchRegex, (match, offset, fullText) => {
-            const preceding = fullText.substring(0, offset);
-            // Se houver um '<' sem um '>' correspondente antes, estamos dentro de uma tag
-            if (preceding.lastIndexOf('<') > preceding.lastIndexOf('>')) return match;
+        highlighted = highlighted.replace(searchRegex, (match, offset, originalText) => {
+            const preceding = originalText.substring(0, offset);
+            if (preceding.lastIndexOf('<') > preceding.lastIndexOf('>')) {
+                return match; // Está dentro de uma tag HTML, não destaca
+            }
             return `<span class="hl-search">${match}</span>`;
         });
     }
