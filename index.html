@@ -276,47 +276,48 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+        // Função para carregar o header e inicializar os menus
+async function loadHeader() {
+    const placeholder = document.getElementById('header-placeholder');
+    if (!placeholder) return;
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+    try {
+        const response = await fetch('header.html');
+        const data = await response.text();
+        placeholder.innerHTML = data;
 
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
+        // Após carregar o HTML, inicializamos os eventos dos botões mobile
+        initMobileMenu();
+    } catch (error) {
+        console.error('Erro ao carregar o cabeçalho:', error);
+    }
+}
 
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-    
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-    
-            // Mobile dropdown toggle for Disciplinas
-            const mobileDisciplinasButton = document.getElementById('mobile-disciplinas-button');
-            const mobileDisciplinasMenu = document.getElementById('mobile-disciplinas-menu');
-            const mobileDisciplinasArrow = mobileDisciplinasButton.querySelector('svg');
-    
-            mobileDisciplinasButton.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default button behavior
-                mobileDisciplinasMenu.classList.toggle('hidden');
-                mobileDisciplinasArrow.classList.toggle('rotate-180');
-            });
-        });
+function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const discBtn = document.getElementById('mobile-disciplinas-button');
+    const discMenu = document.getElementById('mobile-disciplinas-menu');
+
+    if (btn && menu) {
+        btn.onclick = () => menu.classList.toggle('hidden');
+    }
+
+    if (discBtn && discMenu) {
+        discBtn.onclick = () => {
+            discMenu.classList.toggle('hidden');
+            // Gira o ícone da seta
+            discBtn.querySelector('svg').classList.toggle('rotate-180');
+        };
+    }
+}
+
+// Chama a função ao carregar a página
+document.addEventListener('DOMContentLoaded', loadHeader);
     </script>
 </body>
 </html>
+
 
 
 
