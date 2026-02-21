@@ -276,72 +276,46 @@
     </footer>
 
     <script>
-        // Função para carregar o header e inicializar os menus
+       // --- FUNÇÕES GLOBAIS ---
 async function loadHeader() {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) return;
-
     try {
         const response = await fetch('header.html');
         const data = await response.text();
         placeholder.innerHTML = data;
-
-        // Ativa os menus mobile APÓS o HTML ser inserido
         initMobileMenu();
     } catch (error) {
-        console.error('Erro ao carregar o cabeçalho:', error);
-    }
-}
-        function initMobileMenu() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileDisciplinasButton = document.getElementById('mobile-disciplinas-button');
-    const mobileDisciplinasMenu = document.getElementById('mobile-disciplinas-menu');
-
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    if (mobileDisciplinasButton && mobileDisciplinasMenu) {
-        const arrow = mobileDisciplinasButton.querySelector('svg');
-        mobileDisciplinasButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mobileDisciplinasMenu.classList.toggle('hidden');
-            if (arrow) arrow.classList.toggle('rotate-180');
-        });
+        console.error('Erro no header:', error);
     }
 }
 
-// --- 4. ANIMAÇÕES DE FADE-IN (SEU SCRIPT ORIGINAL) ---
+function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.onclick = () => menu.classList.toggle('hidden');
+}
+
 function initAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-    });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
-        document.addEventListener('DOMContentLoaded', () => {
-    loadHeader();       // Carrega o header.html
-    initAnimations();}
-    });
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadHeader();
+    initAnimations();
 });
     </script>
 </body>
 </html>
+
 
 
 
