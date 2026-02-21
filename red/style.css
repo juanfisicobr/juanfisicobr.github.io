@@ -1,108 +1,150 @@
-/* Configurações Gerais */
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 40px; 
-    background-color: #f0f2f5; 
-    color: #333; 
+/* --- 1. CONFIGURAÇÕES GERAIS E CORES --- */
+:root {
+    --bg-dark: #111827;       /* gray-900 */
+    --bg-card: #1f2937;       /* gray-800 */
+    --accent-cyan: #22d3ee;   /* cyan-400 */
+    --text-main: #d1d5db;     /* gray-300 */
+    --hl-ur: #fff176;         /* Amarelo para Unidade de Registro */
+    --hl-search: #ffccbc;     /* Laranja para Busca Global */
 }
 
-.container { 
-    max-width: 1000px; 
-    margin: auto; 
-    background: white; 
-    padding: 30px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.6;
 }
 
-h2 { 
-    color: #1a73e8; 
-    border-bottom: 2px solid #e8f0fe; 
-    padding-bottom: 10px; 
+/* --- 2. ANIMAÇÕES (FADE-IN) --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Estilo da Tabela */
-table { 
-    border-collapse: collapse; 
-    width: 100%; 
-    margin-top: 20px; 
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-th, td { 
-    border: 1px solid #e0e0e0; 
-    padding: 12px; 
-    text-align: left; 
+/* --- 3. ESTILO DOS CARDS E COMPONENTES --- */
+.section-card {
+    background-color: var(--bg-card);
+    border: 1px solid #374151;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
 }
 
-th { 
-    background-color: #f8f9fa; 
-    font-weight: 600; 
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-cyan);
 }
 
-.code-link { 
-    color: #1a73e8; 
-    text-decoration: none; 
-    cursor: pointer; 
-    font-weight: bold; 
-    padding: 4px 8px; 
-    border-radius: 4px; 
-    transition: background 0.2s; 
+.text-glow {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
 }
 
-.code-link:hover { 
-    background-color: #e8f0fe; 
-    text-decoration: underline; 
-}
+/* --- 4. FERRAMENTA DE ANÁLISE QUALITATIVA --- */
 
-/* Área de Exibição do Texto */
-#display-area { 
-    padding: 20px; 
-    border-left: 5px solid #1a73e8; 
-    background: #fdfdfd; 
-    margin-top: 30px; 
-    display: none; 
-    border-radius: 4px; 
-    animation: fadeIn 0.5s; 
-}
-
-@keyframes fadeIn { 
-    from { opacity: 0; } 
-    to { opacity: 1; } 
-}
-
-/* Destaques (Highlighting) */
-.highlight {
-    background-color: #fff176; /* Amarelo para termos do resumo */
-    font-weight: bold;
-    padding: 0 2px;
-    border-radius: 2px;
-}
-
-.global-highlight {
-    background-color: #ffccbc; /* Laranja para busca global */
-    font-weight: bold;
-    border-bottom: 2px solid #e64a19;
-}
-
-/* Rodapé e Busca */
+/* Barra de Pesquisa Global */
 .search-container {
-    background-color: #e8f0fe;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 25px;
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #374151;
+    margin-bottom: 2rem;
 }
 
 #global-search {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 2px solid #1a73e8;
-    border-radius: 4px;
+    background: #111827;
+    border: 2px solid #374151;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-.footer { 
-    margin-top: 40px; 
-    font-size: 0.8em; 
-    color: #666; 
-    text-align: center; 
+#global-search:focus {
+    border-color: var(--accent-cyan);
+}
+
+/* Grid de Unidades (Lista à esquerda) */
+.units-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Scrollbar personalizada para a lista */
+.units-grid::-webkit-scrollbar { width: 6px; }
+.units-grid::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+
+.unit-card {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.unit-card:hover {
+    background: #2d3748;
+    border-left-color: var(--accent-cyan);
+}
+
+.unit-card .id-label {
+    font-weight: bold;
+    color: var(--accent-cyan);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Painel de Leitura (Direita) */
+#reading-pane {
+    position: sticky;
+    top: 100px;
+    background: #1f2937;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* --- 5. LÓGICA DE DESTAQUE (HIGHLIGHTS) --- */
+/* Destaque para Unidade de Registro (UR) */
+.hl-ur {
+    background-color: var(--hl-ur);
+    color: #000;
+    font-weight: bold;
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
+/* Destaque para Busca do Usuário */
+.hl-search {
+    background-color: var(--hl-search);
+    color: #000;
+    font-weight: bold;
+    padding: 0 2px;
+    border-radius: 3px;
+    border-bottom: 2px solid #e64a19;
+}
+
+/* --- 6. RODAPÉ --- */
+.footer {
+    border-top: 1px solid #374151;
+    padding: 2rem 0;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.9rem;
 }
