@@ -1,149 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <title>Análise Interativa de Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Qualitativa - Dr. Juan Carlos Terán Briceño</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-<div class="search-container">
-    <label for="global-search"><strong>Busca por Termo Analítico:</strong></label>
-    <input type="text" id="global-search" placeholder="Ex: autonomia, escrita, isolamento..." oninput="triggerGlobalHighlight()">
-    <p class="search-hint">As palavras digitadas serão destacadas em tempo real em todos os textos exibidos.</p>
-</div>
-<div class="container">
-    <h2>Eixo Temático 1: Gestão de Feedback</h2>
-    <p>Selecione um código abaixo para visualizar o depoimento completo extraído do corpus.</p>
+<body class="bg-gray-900 min-h-screen text-gray-300">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Resumo da Unidade de Registro</th>
-                <th>Categoria</th>
-            </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-    </table>
+    <div id="header-placeholder"></div>
 
-    <div id="display-area">
-        <strong id="display-id" style="color: #1a73e8;"></strong>
-        <p id="full-text" style="font-style: italic; font-size: 1.1em; margin-top: 10px;"></p>
-    </div>
-
-    <div class="footer">
-        Base de dados: Iramuteq_africa_portugal_brasil.txt | Arquivo de suporte: dados.json
-    </div>
-</div>
-
-<script>
-    // Lista de dados para a tabela de Feedback
-    let fullParagraphs = {};
-const feedbackList = [
-    { id: "10P.12", summary: "Eu vou ter cuidado em dar o feedback eu vou ter responsabilidade em dar o feedback.", cat: "Individualizada" },
-    { id: "10P.13", summary: "Uma boa prática que eu acho que foi uma boa prática comigo foi exatamente esta ter um feedback atempado ter um acompanhamento."
-, cat: "Individualizada" },
-    { id: "1P.1", summary: "[...] eu dava sempre o feedback e normalmente em documentos trabalhos e eles costumam gostar às vezes demora um bocadinho porque as coisas são um bocadinho complicadas [...]."
-, cat: "Individualizada" },
-    { id: "10P.15", summary: "[...] no feedback era a forma como feedback era dado e faço isso com as minhas orientadas escolhemos uma legenda de cores para trabalhar no texto [...]."
-, cat: "Individualizada" },
-    { id: "10P.19", summary: "A relação entre o orientador e o orientando é fundamental [...] quando há uma confiança quando há um feedback atempado [...]."
-, cat: "Individualizada" },
-    { id: "3A.16", summary: "Todos colocam as suas questões e eu vou respondendo em conjunto dessa forma vamos avançando todos recebem feedback ao mesmo tempo."
-, cat: "Coletiva" },
-    { id: "12P.29", summary: "Temos tido um feedback positivo relativamente aos nossos colegas quanto a esta prática ah uma coisa que fazemos é que gravamos essa apresentação e enviamos [...]."
-, cat: "Hibridização" },
-    { id: "7B.7", summary: "[...] a gente tem uma pasta compartilhada e a partir dessa pasta compartilhada vai se dando feedback conforme ele vai avançando."
-, cat: "Hibridização" }
-];
-
-fetch('dados.json')
-    .then(response => {
-        if (!response.ok) throw new Error('Erro ao carregar dados.json');
-        return response.json();
-    })
-    .then(data => {
-        fullParagraphs = data;
-        renderTable();
-    })
-    .catch(error => console.error('Erro:', error));
-
-// 2. Renderização da Tabela
-function renderTable() {
-    const tbody = document.getElementById('table-body');
-    if (!tbody) return;
-    
-    tbody.innerHTML = feedbackList.map(item => `
-        <tr>
-            <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
-            <td>${item.summary}</td>
-            <td>${item.cat}</td>
-        </tr>
-    `).join('');
-}
-
-// 3. Função de Escapar Caracteres Especiais (Proteção da Busca)
-function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// 4. Lógica de Destaque (Highlights)
-function applyHighlights(text, id) {
-    let processedText = text;
-    const globalInput = document.getElementById('global-search');
-    const globalTerm = globalInput ? globalInput.value.trim() : "";
-    const itemInfo = feedbackList.find(i => i.id === id);
-
-    // Destaque Automático (Termos do Resumo)
-    if (itemInfo) {
-        const termosResumo = itemInfo.summary.split(' ').filter(p => p.length > 3);
-        termosResumo.forEach(t => {
-            const regex = new RegExp(`(${escapeRegExp(t)})`, 'gi');
-            processedText = processedText.replace(regex, '<span class="highlight">$1</span>');
-        });
-    }
-
-    // Destaque Manual (Busca Global)
-    if (globalTerm.length > 2) {
-        const globalRegex = new RegExp(`(${escapeRegExp(globalTerm)})`, 'gi');
-        processedText = processedText.replace(globalRegex, '<span class="global-highlight">$1</span>');
-    }
-
-    return processedText;
-}
-
-// 5. Exibição do Texto Integral
-function showText(id) {
-    const area = document.getElementById('display-area');
-    const textContainer = document.getElementById('full-text');
-    const idLabel = document.getElementById('display-id');
-    
-    if (fullParagraphs[id]) {
-        // Armazena o ID atual para permitir atualização dinâmica na busca global
-        area.setAttribute('data-current-id', id);
+    <main class="max-w-7xl mx-auto px-6 py-12">
         
-        idLabel.innerText = "Texto Completo (Código " + id + "):";
-        
-        // IMPORTANTE: O uso de innerHTML garante que as tags <span> sejam renderizadas como cores
-        textContainer.innerHTML = "“" + applyHighlights(fullParagraphs[id], id) + "”";
-        
-        area.style.display = 'block';
-        window.scrollTo({ top: area.offsetTop - 50, behavior: 'smooth' });
-    } else {
-        console.warn(`Código ${id} não encontrado no corpus.`);
-    }
-}
+        <section class="mb-12 fade-in">
+            <h2 class="text-3xl font-bold text-white mb-6 text-glow">Exploração do Corpus - Iramuteq</h2>
+            
+            <div class="search-container">
+                <label for="global-search" class="block text-sm font-medium text-cyan-400 mb-2">
+                    Busca por Termo Analítico (Destaque Laranja):
+                </label>
+                <input type="text" id="global-search" 
+                       placeholder="Ex: autonomia, feedback, isolamento..." 
+                       oninput="triggerGlobalHighlight()">
+                <p class="search-hint">Os termos da Unidade de Registro serão destacados em amarelo; a sua busca em laranja.</p>
+            </div>
+        </section>
 
-// 6. Gatilho da Busca Global
-function triggerGlobalHighlight() {
-    const area = document.getElementById('display-area');
-    const currentId = area.getAttribute('data-current-id');
-    if (currentId && area.style.display === 'block') {
-        showText(currentId);
-    }
-}
-</script>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2">
+                <h3 class="text-xl font-semibold text-white mb-4">Unidades de Registro (Eixo 1)</h3>
+                <div id="units-container" class="units-grid">
+                    <div class="p-8 text-center text-gray-500 italic">Carregando corpus...</div>
+                </div>
+            </div>
 
-</body>
+            <aside class="relative">
+                <div id="reading-pane" class="sticky top-24 hidden fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <span id="pane-id" class="id-label">Depoimento na Íntegra</span>
+                        <button onclick="document.getElementById('reading-pane').classList.add('hidden')" class="text-gray-500 hover:text-white">&times;</button>
+                    </div>
+                    <div id="pane-body" class="text-gray-200 leading-relaxed italic text-sm md:text-base">
+                        Selecione uma unidade à esquerda para ler o texto completo com os destaques aplicados.
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </main>
+
+    <footer class="footer fade-in">
+        <div class="max-w-6xl mx-auto px-6">
+            <p>© 2024 Dr. Juan Carlos Terán Briceño - Pesquisa Qualitativa e Complexidade</p>
+        </div>
+    </footer>
+
+    <script src="global.js"></script> <script src="analise.js"></script> </body>
 </html>
