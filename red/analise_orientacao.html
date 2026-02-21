@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Orientações de Doutorado</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 1200px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { text-align: center; color: #1a73e8; margin-bottom: 30px; border-bottom: 2px solid #e8f0fe; padding-bottom: 10px; }
+        
+        .search-container { margin-bottom: 25px; text-align: center; }
+        #global-search { width: 60%; padding: 12px 20px; border: 2px solid #ddd; border-radius: 25px; font-size: 16px; outline: none; transition: border-color 0.3s; }
+        #global-search:focus { border-color: #1a73e8; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+        th { background-color: #1a73e8; color: white; padding: 12px; text-align: left; position: sticky; top: 0; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background-color: #f8fbff; }
+
+        .code-link { color: #1a73e8; font-weight: bold; cursor: pointer; text-decoration: underline; }
+        .code-link:hover { color: #0d47a1; }
+
+        #display-area { display: none; margin-top: 30px; padding: 25px; background: #fff9c4; border-left: 6px solid #fbc02d; border-radius: 4px; animation: fadeIn 0.5s; }
+        #display-id { font-weight: bold; color: #5d4037; margin-bottom: 10px; display: block; }
+        #full-text { font-size: 17px; line-height: 1.8; color: #2c3e50; white-space: pre-wrap; }
+
+        .highlight { background-color: #fff176; padding: 2px 4px; border-radius: 3px; border-bottom: 1px solid #fbc02d; }
+        .global-highlight { background-color: #ff8a65; color: white; padding: 2px 4px; border-radius: 3px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Interface de Análise: Supervisão de Doutorado</h1>
+
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Busca global no texto (mín. 3 letras)..." oninput="triggerGlobalHighlight()">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Unidade de Registro</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Renderizado via JS -->
+        </tbody>
+    </table>
+
+    <div id="display-area">
+        <span id="display-id"></span>
+        <p id="full-text"></p>
+    </div>
+</div>
+
+<script>
+    // Dados carregados do CSV
+    const feedbackList = [{"id": "10P.12", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "10P.13", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "1P.1", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "10P.15", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "10P.19", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "3P.14", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "12P.22", "summary": "Feedback", "cat": "Estratégias Individualizadas"}, {"id": "3A.16", "summary": "Feedback", "cat": "Estratégias Coletivas"}, {"id": "5P.15", "summary": "Feedback", "cat": "Estratégias Coletivas"}, {"id": "12P.29", "summary": "Feedback", "cat": "Estratégias Coletivas"}, {"id": "7B.7", "summary": "Feedback", "cat": "Hibridização"}, {"id": "12P.29", "summary": "Feedback", "cat": "Hibridização"}, {"id": "11P.16", "summary": "Feedback", "cat": "Hibridização"}, {"id": "10B.2", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "3A.24", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "2P.45", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "2P.47", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "8B.3", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "9P.6", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "6B.9", "summary": "Autonomia", "cat": "Estratégias Individualizadas"}, {"id": "8P.1", "summary": "Autonomia", "cat": "Estratégias Coletivas / Institucional"}, {"id": "8P.8", "summary": "Autonomia", "cat": "Estratégias Coletivas / Institucional"}, {"id": "2P.21", "summary": "Autonomia", "cat": "Estratégias Coletivas / Institucional"}, {"id": "6B.10", "summary": "Autonomia", "cat": "Hibridização"}, {"id": "7P.11", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "2B.6", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas / Hibridização"}, {"id": "4B.2", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "6B.4", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "2P.18", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "10B.1", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "4P.11", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "6P.23", "summary": "Relação Diádica", "cat": "Estratégias Individualizadas"}, {"id": "10P.14", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas"}, {"id": "3B.15", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas / Coletivas"}, {"id": "10P.15", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas"}, {"id": "11P.16", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas"}, {"id": "8P.18", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas"}, {"id": "9P.10", "summary": "Gestão de Expectativas", "cat": "Estratégias Individualizadas"}, {"id": "5P.61", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "8B.34", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "8B.6", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "6P.23", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "8B.17", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "4P.7", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "5B.2", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "8B.12", "summary": "Grupos de Pesquisa", "cat": "Estratégias Coletivas"}, {"id": "7P.20", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "5P.61", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "8B.34", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "8B.36", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "4P.4", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "11P.10", "summary": "Comunidades de Prática", "cat": "Estratégias Coletivas"}, {"id": "6P.23", "summary": "Coorientação", "cat": "Estratégias Coletivas"}, {"id": "8B.26", "summary": "Coorientação (Informal)", "cat": "Estratégias Coletivas"}, {"id": "8B.18", "summary": "Coorientação (Gestão)", "cat": "Estratégias Coletivas"}, {"id": "3P.12", "summary": "Coorientação (Coautoria)", "cat": "Estratégias Coletivas"}, {"id": "8B.12", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "12P.28", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "11P.10", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "8B.26", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "5B.2", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "12P.29", "summary": "Socialização entre Pares", "cat": "Estratégias Coletivas"}, {"id": "3B.13", "summary": "Presencialidade", "cat": "Hibridização"}, {"id": "5B.11", "summary": "Presencialidade", "cat": "Hibridização"}, {"id": "2B.6", "summary": "Presencialidade", "cat": "Hibridização"}, {"id": "5B.12", "summary": "Presencialidade", "cat": "Hibridização / Estratégias Coletivas"}, {"id": "10B.4", "summary": "Presencialidade", "cat": "Hibridização / Estratégias Coletivas"}, {"id": "6B.17", "summary": "Presencialidade", "cat": "Hibridização / Estratégias Individualizadas"}, {"id": "9B.3", "summary": "Presencialidade", "cat": "Hibridização / Estratégias Individualizadas"}, {"id": "4A.29", "summary": "Presencialidade", "cat": "Hibridização"}, {"id": "2B.6", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "5B.11", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "6B.10", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "8B.35", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "4A.28", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "6B.10", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "6B.18", "summary": "Virtualidade", "cat": "Hibridização"}, {"id": "2P.15", "summary": "Plataformas Digitais", "cat": "Hibridização / Gestão Institucional"}, {"id": "4A.28", "summary": "Plataformas Digitais", "cat": "Hibridização"}, {"id": "5B.5", "summary": "Plataformas Digitais", "cat": "Hibridização / Estratégias Individualizadas"}, {"id": "12P.28", "summary": "Plataformas Digitais", "cat": "Hibridização / Estratégias Coletivas"}, {"id": "3P.12", "summary": "Plataformas Digitais", "cat": "Hibridização / Feedback"}, {"id": "6B.21", "summary": "Plataformas Digitais", "cat": "Hibridização / Gestão Institucional"}, {"id": "10P.2", "summary": "Mimetismo Pedagógico", "cat": "Gênese da Prática"}, {"id": "10B.2", "summary": "Mimetismo Pedagógico", "cat": "Gênese da Prática"}, {"id": "5P.20", "summary": "Mimetismo Pedagógico", "cat": "Gênese da Prática"}, {"id": "10B.1", "summary": "Aprendizagem pela Prática", "cat": "Gênese da Prática"}, {"id": "5P.20", "summary": "Aprendizagem pela Prática", "cat": "Gênese da Prática"}, {"id": "7P.4", "summary": "Aprendizagem pela Prática", "cat": "Gênese da Prática"}, {"id": "3P.2", "summary": "Aprendizagem pela Prática", "cat": "Gênese da Prática"}, {"id": "2", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática"}, {"id": "19", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática"}, {"id": "10P.2", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática"}, {"id": "10B.2", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática"}, {"id": "5P.20", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática"}, {"id": "11P.10", "summary": "Experiências de Socialização Passadas", "cat": "Gênese da Prática / Estratégias Coletivas"}];
+    let fullParagraphs = {};
+
+    // 1. Carga do JSON de Dados
+    fetch('dados.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Erro ao carregar dados.json');
+            return response.json();
+        })
+        .then(data => {
+            fullParagraphs = data;
+            renderTable();
+        })
+        .catch(error => console.error('Erro:', error));
+
+    // 2. Renderização da Tabela
+    function renderTable() {
+        const tbody = document.getElementById('table-body');
+        if (!tbody) return;
+        
+        tbody.innerHTML = feedbackList.map(item => `
+            <tr>
+                <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
+                <td>${item.summary}</td>
+                <td>${item.cat}</td>
+            </tr>
+        `).join('');
+    }
+
+    // 3. Função de Escapar Caracteres Especiais
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\]/g, '\$&');
+    }
+
+    // 4. Lógica de Destaque (Highlights)
+    function applyHighlights(text, id) {
+        let processedText = text;
+        const globalInput = document.getElementById('global-search');
+        const globalTerm = globalInput ? globalInput.value.trim() : "";
+        
+        // Localizamos a info baseada no id limpo
+        const itemInfo = feedbackList.find(i => i.id === id);
+
+        // Destaque Automático (Termos da Unidade de Registro)
+        if (itemInfo) {
+            const termosResumo = itemInfo.summary.split(' ').filter(p => p.length > 3);
+            termosResumo.forEach(t => {
+                const regex = new RegExp(`(${escapeRegExp(t)})`, 'gi');
+                processedText = processedText.replace(regex, '<span class="highlight">$1</span>');
+            });
+        }
+
+        // Destaque Manual (Busca Global)
+        if (globalTerm.length > 2) {
+            const globalRegex = new RegExp(`(${escapeRegExp(globalTerm)})`, 'gi');
+            processedText = processedText.replace(globalRegex, '<span class="global-highlight">$1</span>');
+        }
+
+        return processedText;
+    }
+
+    // 5. Exibição do Texto Integral
+    function showText(id) {
+        const area = document.getElementById('display-area');
+        const textContainer = document.getElementById('full-text');
+        const idLabel = document.getElementById('display-id');
+        
+        if (fullParagraphs[id]) {
+            area.setAttribute('data-current-id', id);
+            idLabel.innerText = "Texto Completo (Código " + id + "):";
+            textContainer.innerHTML = "“" + applyHighlights(fullParagraphs[id], id) + "”";
+            
+            area.style.display = 'block';
+            window.scrollTo({ top: area.offsetTop - 50, behavior: 'smooth' });
+        } else {
+            console.warn(`Código ${id} não encontrado no corpus.`);
+        }
+    }
+
+    // 6. Gatilho da Busca Global
+    function triggerGlobalHighlight() {
+        const area = document.getElementById('display-area');
+        const currentId = area.getAttribute('data-current-id');
+        if (currentId && area.style.display === 'block') {
+            showText(currentId);
+        }
+    }
+</script>
+
+</body>
+</html>
