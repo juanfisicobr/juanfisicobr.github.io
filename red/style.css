@@ -1,0 +1,108 @@
+/* Configurações Gerais */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 40px; 
+    background-color: #f0f2f5; 
+    color: #333; 
+}
+
+.container { 
+    max-width: 1000px; 
+    margin: auto; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+h2 { 
+    color: #1a73e8; 
+    border-bottom: 2px solid #e8f0fe; 
+    padding-bottom: 10px; 
+}
+
+/* Estilo da Tabela */
+table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    margin-top: 20px; 
+}
+
+th, td { 
+    border: 1px solid #e0e0e0; 
+    padding: 12px; 
+    text-align: left; 
+}
+
+th { 
+    background-color: #f8f9fa; 
+    font-weight: 600; 
+}
+
+.code-link { 
+    color: #1a73e8; 
+    text-decoration: none; 
+    cursor: pointer; 
+    font-weight: bold; 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    transition: background 0.2s; 
+}
+
+.code-link:hover { 
+    background-color: #e8f0fe; 
+    text-decoration: underline; 
+}
+
+/* Área de Exibição do Texto */
+#display-area { 
+    padding: 20px; 
+    border-left: 5px solid #1a73e8; 
+    background: #fdfdfd; 
+    margin-top: 30px; 
+    display: none; 
+    border-radius: 4px; 
+    animation: fadeIn 0.5s; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; } 
+    to { opacity: 1; } 
+}
+
+/* Destaques (Highlighting) */
+.highlight {
+    background-color: #fff176; /* Amarelo para termos do resumo */
+    font-weight: bold;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.global-highlight {
+    background-color: #ffccbc; /* Laranja para busca global */
+    font-weight: bold;
+    border-bottom: 2px solid #e64a19;
+}
+
+/* Rodapé e Busca */
+.search-container {
+    background-color: #e8f0fe;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+#global-search {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 2px solid #1a73e8;
+    border-radius: 4px;
+}
+
+.footer { 
+    margin-top: 40px; 
+    font-size: 0.8em; 
+    color: #666; 
+    text-align: center; 
+}
