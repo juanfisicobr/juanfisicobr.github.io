@@ -58,7 +58,6 @@ const feedbackList = [
 , cat: "Hibridização" }
 ];
 
-/ 1. Carregamento dos dados do JSON
 fetch('dados.json')
     .then(response => {
         if (!response.ok) throw new Error('Erro ao carregar dados.json');
