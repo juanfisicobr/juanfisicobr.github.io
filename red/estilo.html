@@ -3,25 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Análise Interativa de Feedback</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background-color: #f0f2f5; color: #333; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h2 { color: #1a73e8; border-bottom: 2px solid #e8f0fe; padding-bottom: 10px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; }
-        th { background-color: #f8f9fa; font-weight: 600; }
-        .code-link { color: #1a73e8; text-decoration: none; cursor: pointer; font-weight: bold; padding: 4px 8px; border-radius: 4px; transition: background 0.2s; }
-        .code-link:hover { background-color: #e8f0fe; text-decoration: underline; }
-        #display-area { 
-            padding: 20px; border-left: 5px solid #1a73e8; background: #fdfdfd; 
-            margin-top: 30px; display: none; border-radius: 4px; animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .footer { margin-top: 40px; font-size: 0.8em; color: #666; text-align: center; }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-
+<div class="search-container">
+    <label for="global-search"><strong>Busca por Termo Analítico:</strong></label>
+    <input type="text" id="global-search" placeholder="Ex: autonomia, escrita, isolamento..." oninput="triggerGlobalHighlight()">
+    <p class="search-hint">As palavras digitadas serão destacadas em tempo real em todos os textos exibidos.</p>
+</div>
 <div class="container">
     <h2>Eixo Temático 1: Gestão de Feedback</h2>
     <p>Selecione um código abaixo para visualizar o depoimento completo extraído do corpus.</p>
@@ -49,49 +39,80 @@
 
 <script>
     // Lista de dados para a tabela de Feedback
-    const feedbackList = [
-        { id: "10P.12", summary: "Responsabilidade ética no feedback", cat: "Individualizada" },
-        { id: "10P.13", summary: "Feedback atempado e acompanhamento", cat: "Individualizada" },
-        { id: "1P.1", summary: "Dificuldade com volume de orientandos", cat: "Individualizada" },
-        { id: "10P.15", summary: "Uso de legenda de cores no texto", cat: "Individualizada" },
-        { id: "10P.19", summary: "Relação de confiança orientador-orientando", cat: "Individualizada" },
-        { id: "3A.16", summary: "Feedback coletivo e simultâneo", cat: "Coletiva" },
-        { id: "12P.29", summary: "Uso de gravação para treino do aluno", cat: "Hibridização" },
-        { id: "7B.7", summary: "Feedback via pasta compartilhada (nuvem)", cat: "Hibridização" }
-    ];
-
     let fullParagraphs = {};
+const feedbackList = [
+    { id: "10P.12", summary: "Eu vou ter cuidado em dar o feedback eu vou ter responsabilidade em dar o feedback.", cat: "Individualizada" },
+    { id: "10P.13", summary: "Uma boa prática que eu acho que foi uma boa prática comigo foi exatamente esta ter um feedback atempado ter um acompanhamento."
+, cat: "Individualizada" },
+    { id: "1P.1", summary: "[...] eu dava sempre o feedback e normalmente em documentos trabalhos e eles costumam gostar às vezes demora um bocadinho porque as coisas são um bocadinho complicadas [...]."
+, cat: "Individualizada" },
+    { id: "10P.15", summary: "[...] no feedback era a forma como feedback era dado e faço isso com as minhas orientadas escolhemos uma legenda de cores para trabalhar no texto [...]."
+, cat: "Individualizada" },
+    { id: "10P.19", summary: "A relação entre o orientador e o orientando é fundamental [...] quando há uma confiança quando há um feedback atempado [...]."
+, cat: "Individualizada" },
+    { id: "3A.16", summary: "Todos colocam as suas questões e eu vou respondendo em conjunto dessa forma vamos avançando todos recebem feedback ao mesmo tempo."
+, cat: "Coletiva" },
+    { id: "12P.29", summary: "Temos tido um feedback positivo relativamente aos nossos colegas quanto a esta prática ah uma coisa que fazemos é que gravamos essa apresentação e enviamos [...]."
+, cat: "Hibridização" },
+    { id: "7B.7", summary: "[...] a gente tem uma pasta compartilhada e a partir dessa pasta compartilhada vai se dando feedback conforme ele vai avançando."
+, cat: "Hibridização" }
+];
 
-    // Carrega o arquivo JSON gerado
-    fetch('dados.json')
-        .then(response => response.json())
-        .then(data => {
-            fullParagraphs = data;
-            const tbody = document.getElementById('table-body');
-            feedbackList.forEach(item => {
-                const row = `<tr>
-                    <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
-                    <td>${item.summary}</td>
-                    <td>${item.cat}</td>
-                </tr>`;
-                tbody.innerHTML += row;
-            });
+fetch('dados.json')
+    .then(r => r.json())
+    .then(data => {
+        fullParagraphs = data;
+        const tbody = document.getElementById('table-body');
+        feedbackList.forEach(item => {
+            tbody.innerHTML += `<tr>
+                <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
+                <td>${item.summary}</td>
+                <td>${item.cat}</td>
+            </tr>`;
         });
+    });
 
-    function showText(id) {
-        const area = document.getElementById('display-area');
-        const textContent = document.getElementById('full-text');
-        const idLabel = document.getElementById('display-id');
-        
-        if (fullParagraphs[id]) {
-            idLabel.innerText = "Texto Completo (Código " + id + "):";
-            textContent.innerText = "“" + fullParagraphs[id] + "”";
-            area.style.display = 'block';
-            window.scrollTo({ top: area.offsetTop - 50, behavior: 'smooth' });
-        } else {
-            alert("Aviso: O texto para o código " + id + " não foi encontrado no arquivo.");
-        }
+function applyHighlights(text, id) {
+    let processedText = text;
+    const globalTerm = document.getElementById('global-search').value.trim();
+    const itemInfo = feedbackList.find(i => i.id === id);
+
+    // 1. Destacar termos do resumo (Automático)
+    if (itemInfo) {
+        const termosResumo = itemInfo.summary.split(' ').filter(p => p.length > 3);
+        termosResumo.forEach(t => {
+            const regex = new RegExp(`(${t})`, 'gi');
+            processedText = processedText.replace(regex, '<span class="highlight">$1</span>');
+        });
     }
+
+    // 2. Destacar termo da busca global (Manual)
+    if (globalTerm.length > 2) {
+        const globalRegex = new RegExp(`(${globalTerm})`, 'gi');
+        processedText = processedText.replace(globalRegex, '<span class="global-highlight">$1</span>');
+    }
+
+    return processedText;
+}
+
+function showText(id) {
+    const area = document.getElementById('display-area');
+    const textContainer = document.getElementById('full-text');
+    const idLabel = document.getElementById('display-id');
+    
+    if (fullParagraphs[id]) {
+        area.setAttribute('data-current-id', id); // Armazena o ID atual para busca global
+        idLabel.innerText = "Texto Completo (Código " + id + "):";
+        textContainer.innerHTML = "“" + applyHighlights(fullParagraphs[id], id) + "”";
+        area.style.display = 'block';
+    }
+}
+
+function triggerGlobalHighlight() {
+    const area = document.getElementById('display-area');
+    const currentId = area.getAttribute('data-current-id');
+    if (currentId) showText(currentId); // Atualiza o texto exibido com o novo destaque
+}
 </script>
 
 </body>
