@@ -67,7 +67,7 @@
             line-height: 1.6;
         }
     </style>
-<div id="header-placeholder"></div>
+    <div id="header-placeholder"></div>
 
     <main class="max-w-6xl mx-auto px-6 py-12">
         <section class="text-center mb-20 fade-in">
@@ -276,27 +276,22 @@
     </footer>
 
     <script>
-       // --- FUNÇÕES GLOBAIS ---
-async function loadHeader() {
+       async function loadHeader() {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) return;
     try {
         const response = await fetch('header.html');
         const data = await response.text();
         placeholder.innerHTML = data;
-        initMobileMenu();
-    } catch (error) {
-        console.error('Erro no header:', error);
-    }
+        
+        // Inicializa o menu mobile após o carregamento
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) btn.onclick = () => menu.classList.toggle('hidden');
+    } catch (e) { console.error("Erro ao carregar header:", e); }
 }
 
-function initMobileMenu() {
-    const btn = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('mobile-menu');
-    if (btn && menu) btn.onclick = () => menu.classList.toggle('hidden');
-}
-
-function initAnimations() {
+function initFadeIn() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -304,17 +299,17 @@ function initAnimations() {
             }
         });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     loadHeader();
-    initAnimations();
+    initFadeIn();
 });
     </script>
 </body>
 </html>
+
 
 
 
