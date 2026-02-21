@@ -58,60 +58,91 @@ const feedbackList = [
 , cat: "Hibridização" }
 ];
 
+/ 1. Carregamento dos dados do JSON
 fetch('dados.json')
-    .then(r => r.json())
+    .then(response => {
+        if (!response.ok) throw new Error('Erro ao carregar dados.json');
+        return response.json();
+    })
     .then(data => {
         fullParagraphs = data;
-        const tbody = document.getElementById('table-body');
-        feedbackList.forEach(item => {
-            tbody.innerHTML += `<tr>
-                <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
-                <td>${item.summary}</td>
-                <td>${item.cat}</td>
-            </tr>`;
-        });
-    });
+        renderTable();
+    })
+    .catch(error => console.error('Erro:', error));
 
+// 2. Renderização da Tabela
+function renderTable() {
+    const tbody = document.getElementById('table-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = feedbackList.map(item => `
+        <tr>
+            <td><a class="code-link" onclick="showText('${item.id}')">${item.id}</a></td>
+            <td>${item.summary}</td>
+            <td>${item.cat}</td>
+        </tr>
+    `).join('');
+}
+
+// 3. Função de Escapar Caracteres Especiais (Proteção da Busca)
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 4. Lógica de Destaque (Highlights)
 function applyHighlights(text, id) {
     let processedText = text;
-    const globalTerm = document.getElementById('global-search').value.trim();
+    const globalInput = document.getElementById('global-search');
+    const globalTerm = globalInput ? globalInput.value.trim() : "";
     const itemInfo = feedbackList.find(i => i.id === id);
 
-    // 1. Destacar termos do resumo (Automático)
+    // Destaque Automático (Termos do Resumo)
     if (itemInfo) {
         const termosResumo = itemInfo.summary.split(' ').filter(p => p.length > 3);
         termosResumo.forEach(t => {
-            const regex = new RegExp(`(${t})`, 'gi');
+            const regex = new RegExp(`(${escapeRegExp(t)})`, 'gi');
             processedText = processedText.replace(regex, '<span class="highlight">$1</span>');
         });
     }
 
-    // 2. Destacar termo da busca global (Manual)
+    // Destaque Manual (Busca Global)
     if (globalTerm.length > 2) {
-        const globalRegex = new RegExp(`(${globalTerm})`, 'gi');
+        const globalRegex = new RegExp(`(${escapeRegExp(globalTerm)})`, 'gi');
         processedText = processedText.replace(globalRegex, '<span class="global-highlight">$1</span>');
     }
 
     return processedText;
 }
 
+// 5. Exibição do Texto Integral
 function showText(id) {
     const area = document.getElementById('display-area');
     const textContainer = document.getElementById('full-text');
     const idLabel = document.getElementById('display-id');
     
     if (fullParagraphs[id]) {
-        area.setAttribute('data-current-id', id); // Armazena o ID atual para busca global
+        // Armazena o ID atual para permitir atualização dinâmica na busca global
+        area.setAttribute('data-current-id', id);
+        
         idLabel.innerText = "Texto Completo (Código " + id + "):";
+        
+        // IMPORTANTE: O uso de innerHTML garante que as tags <span> sejam renderizadas como cores
         textContainer.innerHTML = "“" + applyHighlights(fullParagraphs[id], id) + "”";
+        
         area.style.display = 'block';
+        window.scrollTo({ top: area.offsetTop - 50, behavior: 'smooth' });
+    } else {
+        console.warn(`Código ${id} não encontrado no corpus.`);
     }
 }
 
+// 6. Gatilho da Busca Global
 function triggerGlobalHighlight() {
     const area = document.getElementById('display-area');
     const currentId = area.getAttribute('data-current-id');
-    if (currentId) showText(currentId); // Atualiza o texto exibido com o novo destaque
+    if (currentId && area.style.display === 'block') {
+        showText(currentId);
+    }
 }
 </script>
 
