@@ -10,26 +10,35 @@
     
     <style>
         body { background-color: #f8f9fa; color: #333; }
-        .hero { background: linear-gradient(135deg, #2c3e50, #000000); color: white; padding: 60px 0; }
-        .card-eixo { border-left: 5px solid #0d6efd; transition: 0.3s; }
-        .card-eixo:hover { transform: translateY(-5px); }
-        footer { background: #212529; color: #aaa; padding: 30px 0; }
+        .hero { background: linear-gradient(135deg, #1a2a3a, #000000); color: white; padding: 60px 0; }
+        .card-eixo { border-left: 5px solid #0d6efd; transition: 0.3s; background: white; }
+        .card-eixo:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        footer { background: #212529; color: #aaa; padding: 30px 0; margin-top: 50px; }
+        .badge-eixo { font-size: 0.75rem; padding: 5px 10px; }
     </style>
 </head>
 <body>
 
 <header class="hero text-center">
     <div class="container">
+        <div class="mb-3">
+            <span class="badge bg-success px-3 py-2">Artigo Aceito para Publicação</span>
+        </div>
         <h1 class="display-4 fw-bold">Estratégias de Pesquisa em Educação</h1>
         <p class="lead">Catálogo de 27 Teses Selecionadas sob a Perspectiva do Pensamento Complexo (2015-2024)</p>
+        <div class="mt-4">
+            <small class="text-light opacity-75">
+                Publicação prevista: 1º Semestre de 2026 | <b>Revista Pesquisa Qualitativa (Número Especial SIPEQ)</b>
+            </small>
+        </div>
     </div>
 </header>
 
 <main class="container my-5">
     
     <section class="mb-5">
-        <h2 class="border-bottom pb-2">O Método como Percurso</h2>
-        <p>Este repositório apresenta as teses brasileiras em Educação que utilizam o pensamento complexo como base epistemológica, selecionadas conforme o rigor metodológico de Edgar Morin[cite: 108, 111]. Os estudos foram agrupados em quatro eixos temáticos principais [cite: 132-135]:</p>
+        <h2 class="border-bottom pb-2">Eixos Temáticos da Pesquisa</h2>
+        <p>As teses foram agrupadas em quatro eixos com base em suas perguntas de pesquisa e objetivos centrais:</p>
         
         <div class="row g-4 mt-2">
             <div class="col-md-3">
@@ -39,7 +48,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card h-100 card-eixo p-3 shadow-sm">
+                <div class="card h-100 card-eixo p-3">
                     <h6 class="fw-bold">Eixo 2</h6>
                     <small>Mudanças Paradigmáticas e Epistemológicas</small>
                 </div>
@@ -66,39 +75,43 @@
                 <tr>
                     <th>Ano</th>
                     <th>Autor</th>
+                    <th>Eixo Temático</th>
                     <th>Título da Tese</th>
                     <th>Estratégia</th>
                     <th>Acesso</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>2023</td><td>Ladchuk, D. G. R.</td><td>Educação Ambiental à luz do pensamento complexo...</td><td>Pesquisa-formação</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=13742785" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2022</td><td>Cararo, J. F. J.</td><td>A Colaboração entre Professores no Processo Educativo...</td><td>Qualitativa</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000ad/0000ad09.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2022</td><td>Oliveira, T. L. F.</td><td>Paradigmas da Complexidade na Formação do Prof. de Matemática</td><td>Estudo de Caso</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000a4/0000a4e6.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2022</td><td>Pinheiro, S. L.</td><td>Caminhos transdisciplinares para um autoconhecimento...</td><td>Transdisciplinar</td><td><a href="https://sistemas.furg.br/sistemas/sab/arquivos/bdtd/0000014987.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2022</td><td>Oliveira, D. A. D.</td><td>Formação docente e a disciplina de projeto articulador...</td><td>Estudo de Caso</td><td><a href="http://tede2.uepg.br/jspui/handle/prefix/3746" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Borille, J. M.</td><td>Prática Pedagógica e Formação Docente Universitária...</td><td>Pesquisa-ação</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/00009b/00009b24.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Luppi, M. A. R.</td><td>Construtos e Saberes Necessários à Formação Pedagógica...</td><td>Estudo de Caso</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000a1/0000a1cd.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Goes, H. C.</td><td>Aproximações entre Pensamento Complexo e Processos Didáticos</td><td>Qualitativa</td><td><a href="https://hdl.handle.net/1884/72774" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Berg, J.</td><td>Meta-criatividade na Educação: Perspectiva Complexa</td><td>Pesquisa Teórica</td><td><a href="https://hdl.handle.net/1884/72601" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Ribeiro, F. O.</td><td>Docência e Consciência a partir de Maria Cândida Moraes</td><td>Qualitativa</td><td><a href="https://bdtd.ucb.br:8443/jspui/handle/tede/2903" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Figueiredo, G. A.</td><td>O Doce Saber da Terra: tecendo saberes no Semiárido</td><td>Narrativa</td><td><a href="https://repositorio.ufrn.br/handle/123456789/45464" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2021</td><td>Silva, R. D. S.</td><td>Transdisciplinaridade e uso de software de simulação...</td><td>Pesquisa-ação</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/57680" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2020</td><td>Martinelli, L. M. B.</td><td>A Formação dos Professores subsidiada pela Teoria da Complexidade</td><td>Casos Múltiplos</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/00008d/00008d56.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2019</td><td>Zaclikevic, C. M.</td><td>Formação Continuada de Professores a Distância</td><td>Caso Único</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00007a/00007a7e.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2019</td><td>Neves Junior, I. J.</td><td>A contribuição do pensamento ecossistêmico na docência...</td><td>Quanti-quali</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=8100328" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2019</td><td>Carvalho, R. C.</td><td>Teoria da Complexidade na Pesquisa em Política Educacional</td><td>Metapesquisa</td><td><a href="http://tede.upf.br:8080/jspui/handle/tede/1871" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2019</td><td>Mihaliuc, K. M. M.</td><td>Cidadania Planetária como tema transdisciplinar...</td><td>Estudo de Caso</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/47293" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2018</td><td>Prigol, E. L.</td><td>Pensamento Complexo e Transdisciplinar: Ecologia dos Saberes</td><td>Qualitativa</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00006b/00006b08.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2018</td><td>Nascimento, E. C.</td><td>Práticas Profissionais de Pedagogas junto aos Coordenadores</td><td>Casos Múltiplos</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00006c/00006c8b.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2017</td><td>Schechtman, S.</td><td>Dinâmicas Curriculares e Ações Pedagógicas...</td><td>Estudo de Caso</td><td><a href="https://bdtd.ucb.br:8443/jspui/handle/tede/2195" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2017</td><td>Santos, D. B.</td><td>Emergências de uma Metodologia Transdisciplinar para EaD</td><td>Estratégias Metod.</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=5004811" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2017</td><td>Malta, S. O.</td><td>Educação Ambiental e o ensino de Administração</td><td>Estudo de Caso</td><td><a href="http://repositorio.furg.br/handle/1/10097" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2016</td><td>Anastacio, M. R.</td><td>Autobiografia Educativa e Profissional como Dispositivo</td><td>Hermenêutica</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/tede/mariregina3ok.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2015</td><td>Scherre, P. P.</td><td>(Trans)formação do ser docente-pesquisador</td><td>Narrativa</td><td><a href="https://siduece.uece.br/siduece/trabalhoAcademicoPublico.jsf?id=82428" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2015</td><td>Freire, L. A.</td><td>A Universidade e a questão do conhecimento...</td><td>Etnográfica</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/14379" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2015</td><td>Amarante, A. A.</td><td>Religações de saberes em tempos de rede</td><td>Pesquisa Teórica</td><td><a href="http://hdl.handle.net/10183/131890" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
-                <tr><td>2015</td><td>Trindade, A. F. G.</td><td>Pedagogia poiética para a potência humana</td><td>Pesquisa-ação</td><td><a href="http://tede2.pucrs.br/tede2/handle/tede/6410" target="_blank" class="btn btn-sm btn-outline-primary">Tese</a></td></tr>
+                <tr><td>2023</td><td>Ladchuk, D. G. R.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Educação Ambiental à luz do pensamento complexo...</td><td>Pesquisa-formação</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=13742785" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2022</td><td>Cararo, J. F. J.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>A Colaboração entre Professores no Processo Educativo...</td><td>Qualitativa</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000ad/0000ad09.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2022</td><td>Oliveira, T. L. F.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Paradigmas da Complexidade na Formação do Prof. de Matemática</td><td>Estudo de Caso</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000a4/0000a4e6.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2022</td><td>Oliveira, D. A. D.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Formação docente e a disciplina de projeto articulador...</td><td>Estudo de Caso</td><td><a href="http://tede2.uepg.br/jspui/handle/prefix/3746" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Borille, J. M.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Prática Pedagógica e Formação Docente Universitária...</td><td>Pesquisa-ação</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/00009b/00009b24.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Luppi, M. A. R.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Construtos e Saberes Necessários à Formação Pedagógica...</td><td>Estudo de Caso</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/0000a1/0000a1cd.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Goes, H. C.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Aproximações entre Pensamento Complexo e Processos Didáticos</td><td>Qualitativa</td><td><a href="https://hdl.handle.net/1884/72774" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2020</td><td>Martinelli, L. M. B.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>A Formação dos Professores subsidiada pela Teoria da Complexidade</td><td>Casos Múltiplos</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/00008d/00008d56.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2019</td><td>Zaclikevic, C. M.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Formação Continuada de Professores a Distância</td><td>Caso Único</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00007a/00007a7e.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2019</td><td>Mihaliuc, K. M. M.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Cidadania Planetária como tema transdisciplinar...</td><td>Estudo de Caso</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/47293" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2017</td><td>Schechtman, S.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Dinâmicas Curriculares e Ações Pedagógicas...</td><td>Estudo de Caso</td><td><a href="https://bdtd.ucb.br:8443/jspui/handle/tede/2195" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2017</td><td>Malta, S. O.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Educação Ambiental e o ensino de Administração</td><td>Estudo de Caso</td><td><a href="http://repositorio.furg.br/handle/1/10097" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2016</td><td>Anastacio, M. R.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Autobiografia Educativa e Profissional como Dispositivo</td><td>Hermenêutica</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos/tede/mariregina3ok.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2015</td><td>Freire, L. A.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>A Universidade e a questão do conhecimento...</td><td>Etnográfica</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/14379" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2015</td><td>Trindade, A. F. G.</td><td><span class="badge bg-primary badge-eixo">Eixo 1</span></td><td>Pedagogia poiética para a potência humana</td><td>Pesquisa-ação</td><td><a href="http://tede2.pucrs.br/tede2/handle/tede/6410" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+
+                <tr><td>2022</td><td>Pinheiro, S. L.</td><td><span class="badge bg-success badge-eixo">Eixo 2</span></td><td>Caminhos transdisciplinares para um autoconhecimento...</td><td>Transdisciplinar</td><td><a href="https://sistemas.furg.br/sistemas/sab/arquivos/bdtd/0000014987.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Berg, J.</td><td><span class="badge bg-success badge-eixo">Eixo 2</span></td><td>Meta-criatividade na Educação: Perspectiva Complexa</td><td>Pesquisa Teórica</td><td><a href="https://hdl.handle.net/1884/72601" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2019</td><td>Carvalho, R. C.</td><td><span class="badge bg-success badge-eixo">Eixo 2</span></td><td>Teoria da Complexidade na Pesquisa em Política Educacional</td><td>Metapesquisa</td><td><a href="http://tede.upf.br:8080/jspui/handle/tede/1871" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2015</td><td>Amarante, A. A.</td><td><span class="badge bg-success badge-eixo">Eixo 2</span></td><td>Religações de saberes em tempos de rede</td><td>Pesquisa Teórica</td><td><a href="http://hdl.handle.net/10183/131890" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+
+                <tr><td>2021</td><td>Ribeiro, F. O.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>Docência e Consciência a partir de Maria Cândida Moraes</td><td>Qualitativa</td><td><a href="https://bdtd.ucb.br:8443/jspui/handle/tede/2903" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Figueiredo, G. A.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>O Doce Saber da Terra: tecendo saberes no Semiárido</td><td>Narrativa</td><td><a href="https://repositorio.ufrn.br/handle/123456789/45464" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2021</td><td>Silva, R. D. S.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>Transdisciplinaridade e uso de software de simulação...</td><td>Pesquisa-ação</td><td><a href="http://www.repositorio.ufc.br/handle/riufc/57680" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2019</td><td>Neves Junior, I. J.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>A contribuição do pensamento ecossistêmico na docência...</td><td>Quanti-quali</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=8100328" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2018</td><td>Prigol, E. L.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>Pensamento Complexo e Transdisciplinar: Ecologia dos Saberes</td><td>Qualitativa</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00006b/00006b08.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2018</td><td>Nascimento, E. C.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>Práticas Profissionais de Pedagogas junto aos Coordenadores</td><td>Casos Múltiplos</td><td><a href="https://archivum.grupomarista.org.br/pergamumweb/vinculos//00006c/00006c8b.pdf" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+                <tr><td>2015</td><td>Scherre, P. P.</td><td><span class="badge bg-info text-dark badge-eixo">Eixo 3</span></td><td>(Trans)formação do ser docente-pesquisador</td><td>Narrativa</td><td><a href="https://siduece.uece.br/siduece/trabalhoAcademicoPublico.jsf?id=82428" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
+
+                <tr><td>2017</td><td>Santos, D. B.</td><td><span class="badge bg-warning text-dark badge-eixo">Eixo 4</span></td><td>Emergências de uma Metodologia Transdisciplinar para EaD</td><td>Estratégias Metod.</td><td><a href="https://sucupira-legado.capes.gov.br/sucupira/public/consultas/coleta/trabalhoConclusao/viewTrabalhoConclusao.jsf?popup=true&id_trabalho=5004811" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a></td></tr>
             </tbody>
         </table>
     </section>
@@ -106,8 +119,11 @@
 
 <footer class="text-center">
     <div class="container">
-        <p>Desenvolvido com base no artigo: <i>O Método como Percurso</i> (2025)[cite: 1].</p>
-        <small>Referência dos dados: Teran Briceno; Tauchen, 2025. DOI: 10.5281/zenodo.17858429[cite: 228].</small>
+        <p><b>Artigo:</b> O Método como Percurso: Estratégias de Pesquisa em Educação Orientadas pelo Pensamento Complexo.</p>
+        <p><b>Autores:</b> Gionara Tauchen e Juan Carlos Teran Briceño.</p>
+        <p class="mb-4">Aceito na <b>Revista Pesquisa Qualitativa (RPQ)</b> - Número Especial SIPEQ.</p>
+        <hr class="bg-secondary">
+        <small>Referência dos dados: Teran Briceno; Tauchen, 2025. DOI: 10.5281/zenodo.17858429[cite: 228, 229].</small>
     </div>
 </footer>
 
@@ -120,7 +136,7 @@
         $('#tesesTable').DataTable({
             "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json" },
             "pageLength": 10,
-            "order": [[ 0, "desc" ]]
+            "order": [[ 2, "asc" ], [ 0, "desc" ]] // Ordena por Eixo e depois por Ano
         });
     });
 </script>
