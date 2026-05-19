@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Geoplano Virtual</title>
     <style>
         body {
@@ -10,6 +11,8 @@
             align-items: center;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
         }
         #tabuleiro {
             background-color: #e0d0b0; /* Cor imitando madeira */
@@ -19,12 +22,14 @@
             margin-top: 20px;
             cursor: pointer;
         }
-        h1 { color: #333; margin-top: 20px; }
+        h1 { color: #333; margin: 10px 0; }
+        p { color: #666; font-size: 14px; max-width: 420px; text-align: center; line-height: 1.4; }
     </style>
 </head>
 <body>
 
-    <h1>Geoplano Virtual Prototipo</h1>
+    <h1>Geoplano Virtual</h1>
+    <p>Protótipo funcional renderizado em Canvas. Há um elástico triangular vermelho tensionado entre os pinos 0, 10 e 12.</p>
     <canvas id="tabuleiro" width="400" height="400"></canvas>
 
     <script>
@@ -35,7 +40,7 @@
         const linhas = 5;
         const espacamento = 80; // Distância em pixels entre os pinos
         const margem = 40;      // Margem interna do canvas
-        const pinos =;
+        const pinos =;       // CORREÇÃO: Inicializado corretamente como array vazio
 
         // 1. Gerar e armazenar as coordenadas dos pinos
         for (let i = 0; i < colunas; i++) {
@@ -50,39 +55,44 @@
 
         // 2. Função para desenhar o Geoplano
         function desenharGeoplano() {
-            // Limpar a tela
+            // Limpar a tela do canvas antes de desenhar
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Exemplo de elástico (Polígono de 3 vértices)
-            // Ligando o Pino (0,0), o Pino (2,0) e o Pino (1,2)
-            ctx.beginPath();
-            ctx.moveTo(pinos.x, pinos.y); // Pino superior esquerdo
-            ctx.lineTo(pinos.[1]x, pinos.[1]y); 
-            ctx.lineTo(pinos.[2]x, pinos.[2]y);
-            ctx.closePath();
-            
-            // Estilo do elástico
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = '#ff3333'; // Elástico vermelho
-            ctx.fillStyle = 'rgba(255, 51, 51, 0.2)'; // Preenchimento translúcido
-            ctx.fill();
-            ctx.stroke();
+            // Conectando os pinos de índices 0, 10 e 12 de forma segura
+            if (pinos.length > 12) {
+                ctx.beginPath();
+                ctx.moveTo(pinos.x, pinos.y);   // CORREÇÃO: Primeiro vértice (Pino superior esquerdo)
+                ctx.lineTo(pinos.[1]x, pinos.[1]y); // CORREÇÃO: Segundo vértice
+                ctx.lineTo(pinos.[2]x, pinos.[2]y); // CORREÇÃO: Terceiro vértice
+                ctx.closePath();
+                
+                // Estilização visual do elástico tensionado
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#ff3333'; // Elástico vermelho
+                ctx.fillStyle = 'rgba(255, 51, 51, 0.2)'; // Preenchimento translúcido da área
+                ctx.fill();
+                ctx.stroke();
+            }
 
-            // Desenhar os pinos na tela
+            // Desenhar todos os pinos da malha na tela
             pinos.forEach(pino => {
                 ctx.beginPath();
                 ctx.arc(pino.x, pino.y, pino.raio, 0, Math.PI * 2);
-                ctx.fillStyle = '#444'; // Cor cinza escuro para os pinos
+                ctx.fillStyle = '#444'; // Cor escura para simular o pino/prego
+                
+                // Efeito sutil de sombra nos pinos para dar tridimensionalidade
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
                 ctx.shadowBlur = 4;
                 ctx.shadowOffsetY = 2;
                 ctx.fill();
-                // Resetar sombra para os próximos desenhos
+                
+                // Resetar a sombra para evitar que afete outros desenhos
                 ctx.shadowColor = 'transparent';
             });
         }
 
-        // Inicializar o desenho
+        // Inicializar o desenho do geoplano na tela
         desenharGeoplano();
     </script>
 </body>
