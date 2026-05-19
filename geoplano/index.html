@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Geoplano Virtual</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #tabuleiro {
+            background-color: #e0d0b0; /* Cor imitando madeira */
+            border: 4px solid #8b5a2b;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        h1 { color: #333; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Geoplano Virtual Prototipo</h1>
+    <canvas id="tabuleiro" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('tabuleiro');
+        const ctx = canvas.getContext('2d');
+
+        const colunas = 5;
+        const linhas = 5;
+        const espacamento = 80; // Distância em pixels entre os pinos
+        const margem = 40;      // Margem interna do canvas
+        const pinos =;
+
+        // 1. Gerar e armazenar as coordenadas dos pinos
+        for (let i = 0; i < colunas; i++) {
+            for (let j = 0; j < linhas; j++) {
+                pinos.push({
+                    x: margem + i * espacamento,
+                    y: margem + j * espacamento,
+                    raio: 6
+                });
+            }
+        }
+
+        // 2. Função para desenhar o Geoplano
+        function desenharGeoplano() {
+            // Limpar a tela
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Exemplo de elástico (Polígono de 3 vértices)
+            // Ligando o Pino (0,0), o Pino (2,0) e o Pino (1,2)
+            ctx.beginPath();
+            ctx.moveTo(pinos.x, pinos.y); // Pino superior esquerdo
+            ctx.lineTo(pinos.[1]x, pinos.[1]y); 
+            ctx.lineTo(pinos.[2]x, pinos.[2]y);
+            ctx.closePath();
+            
+            // Estilo do elástico
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#ff3333'; // Elástico vermelho
+            ctx.fillStyle = 'rgba(255, 51, 51, 0.2)'; // Preenchimento translúcido
+            ctx.fill();
+            ctx.stroke();
+
+            // Desenhar os pinos na tela
+            pinos.forEach(pino => {
+                ctx.beginPath();
+                ctx.arc(pino.x, pino.y, pino.raio, 0, Math.PI * 2);
+                ctx.fillStyle = '#444'; // Cor cinza escuro para os pinos
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetY = 2;
+                ctx.fill();
+                // Resetar sombra para os próximos desenhos
+                ctx.shadowColor = 'transparent';
+            });
+        }
+
+        // Inicializar o desenho
+        desenharGeoplano();
+    </script>
+</body>
+</html>
