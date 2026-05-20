@@ -14,14 +14,20 @@
             margin: 0;
             padding: 20px;
             user-select: none;
-            touch-action: none;
         }
         h1 { color: #2c3e50; margin: 5px 0; font-size: 28px; }
-        p { color: #576574; font-size: 14px; max-width: 500px; text-align: center; line-height: 1.5; margin-bottom: 15px; }
+        p { color: #576574; font-size: 14px; max-width: 500px; text-align: center; line-height: 1.5; margin-bottom: 15px; }        
 
-        .panel-controle { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+        /* Painel de Botões Pedagógicos */
+       .panel-controle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-        .btn-forma {
+       .btn-forma {
             background-color: #34495e;
             color: #ffffff;
             border: none;
@@ -34,27 +40,48 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
 
-        .btn-forma:hover { background-color: #2c3e50; transform: translateY(-1px); }
+       .btn-forma:hover {
+            background-color: #2c3e50;
+            transform: translateY(-1px);
+        }
 
-        /* Estilo para botão ativo */
-        .btn-forma.active {
-            background-color: #e74c3c !important;
+       .btn-forma.active {
+            background-color: #e74c3c; /* Destaca a forma ativa em vermelho */
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
         }
 
         #tabuleiro {
-            background-color: #e0d0b0;
+            background-color: #e0d0b0; /* Imitação de madeira clássica */
             border: 5px solid #8b5a2b;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.25);
             touch-action: none;
+        }    
+
+       .instrucoes {
+            background-color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 20px;
+            font-size: 13px;
+            color: #2c3e50;
+            text-align: center;
+            max-width: 440px;
+            border-left: 4px solid #e74c3c;
+        }
+
+       .status-forma {
+            font-weight: bold;
+            color: #e74c3c;
         }
     </style>
+
 </head>
 <body>
 
     <h1>Geoplano Multi-Formas</h1>
-    <p>Selecione uma forma para manipular.</p>
+    <p>Selecione uma das formas abaixo para gerar o elástico correspondente. Em seguida, clique e arraste as pontas vermelhas para investigar novas propriedades geométricas.</p>
 
     <div class="panel-controle">
         <button id="btn-triangulo" class="btn-forma active" onclick="configurarForma('triangulo', this)">Triângulo</button>
@@ -64,7 +91,9 @@
     </div>
 
     <canvas id="tabuleiro" width="400" height="400"></canvas>
-
+    <div class="instrucoes">
+        <strong>Exploração Ativa:</strong> O elástico atual possui <span id="num-pontos-txt" class="status-forma">3</span> vértices. Arraste qualquer ponta para mudar as dimensões e estimar a área.
+    </div>
     <script>
         const canvas = document.getElementById('tabuleiro');
         const ctx = canvas.getContext('2d');
