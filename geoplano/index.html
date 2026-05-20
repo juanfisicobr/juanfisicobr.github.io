@@ -84,10 +84,10 @@
     <p>Selecione uma das formas abaixo para gerar o elástico correspondente. Em seguida, clique e arraste as pontas vermelhas para investigar novas propriedades geométricas.</p>
 
     <div class="panel-controle">
-        <button id="btn-triangulo" class="btn-forma active" onclick="configurarForma('triangulo')">Triângulo (3 Pontos)</button>
-        <button id="btn-quadrado" class="btn-forma" onclick="configurarForma('quadrado')">Quadrado (4 Pontos)</button>
-        <button id="btn-pentagono" class="btn-forma" onclick="configurarForma('pentagono')">Pentágono (5 Pontos)</button>
-        <button id="btn-hexagono" class="btn-forma" onclick="configurarForma('hexagono')">Hexágono (6 Pontos)</button>
+        <button id="btn-triangulo" class="btn-forma active" onclick="configurarForma('triangulo', this)">Triângulo</button>
+        <button id="btn-quadrado" class="btn-forma" onclick="configurarForma('quadrado', this)">Quadrado</button>
+        <button id="btn-pentagono" class="btn-forma" onclick="configurarForma('pentagono', this)">Pentágono</button>
+        <button id="btn-hexagono" class="btn-forma" onclick="configurarForma('hexagono', this)">Hexágono</button>
     </div>
 
     <canvas id="tabuleiro" width="400" height="400"></canvas>
