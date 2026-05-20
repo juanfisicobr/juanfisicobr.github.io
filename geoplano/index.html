@@ -85,7 +85,7 @@
         <button id="btn-hexagono" class="btn-forma" onclick="configurarForma('hexagono')">Hexágono (6 Pontos)</button>
     </div>
 
-    <canvas id="tabuleiro" width="560" height="560"></canvas>
+    <canvas id="tabuleiro" width="400" height="400"></canvas>
 
     <div class="instrucoes">
         <strong>Exploração Ativa:</strong> O elástico atual possui <span id="num-pontos-txt" class="status-forma">3</span> vértices. Arraste qualquer ponta para mudar as dimensões e estimar a área.
@@ -95,8 +95,8 @@
         const canvas = document.getElementById('tabuleiro');
         const ctx = canvas.getContext('2d');
 
-        const colunas = 7;
-        const linhas = 7;
+        const colunas = 5;
+        const linhas = 5;
         const espacamento = 80; 
         const margem = 40;      
         const pinos = Array();  
