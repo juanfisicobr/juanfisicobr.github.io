@@ -68,30 +68,25 @@
     <script>
         const canvas = document.getElementById('tabuleiro');
         const ctx = canvas.getContext('2d');
+        const colunas = 5, linhas = 5, espacamento = 80, margem = 40;
         const pinos = [];
-        const espacamento = 80, margem = 40;
-        
-        for (let i = 0; i < 5; i++) {
-            for (let j = 0; j < 5; j++) {
-                pinos.push({ x: margem + i * espacamento, y: margem + j * espacamento });
+        for (let i = 0; i < colunas; i++) {
+            for (let j = 0; j < linhas; j++) {
+                pinos.push({ x: margem + i * espacamento, y: margem + j * espacamento, raio: 6 });
             }
         }
 
         const verticesElasticos = [];
         let verticeArrastadoIndex = null;
 
-        function configurarForma(tipo, btnElemento) {
-            // 1. Lógica de troca de cor dos botões
-            document.querySelectorAll('.btn-forma').forEach(btn => btn.classList.remove('active'));
-            btnElemento.classList.add('active');
-
-            // 2. Lógica de desenho
+        function configurarForma(tipo) {
             verticesElasticos.length = 0;
             if (tipo === 'triangulo') verticesElasticos.push(0, 10, 12);
             else if (tipo === 'quadrado') verticesElasticos.push(6, 8, 18, 16);
             else if (tipo === 'pentagono') verticesElasticos.push(10, 22, 19, 9, 2);
             else if (tipo === 'hexagono') verticesElasticos.push(5, 15, 22, 19, 9, 2);
             
+            document.getElementById('num-pontos-txt').innerText = verticesElasticos.length;
             desenharGeoplano();
         }
 
@@ -101,22 +96,72 @@
             ctx.moveTo(pinos[verticesElasticos[0]].x, pinos[verticesElasticos[0]].y);
             for (let i = 1; i < verticesElasticos.length; i++) ctx.lineTo(pinos[verticesElasticos[i]].x, pinos[verticesElasticos[i]].y);
             ctx.closePath();
-            ctx.fillStyle = 'rgba(231, 76, 60, 0.25)'; ctx.fill();
-            ctx.strokeStyle = '#e74c3c'; ctx.lineWidth = 6; ctx.stroke();
+            ctx.fillStyle = 'rgba(231, 76, 60, 0.25)';
+            ctx.fill();
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 6;
+            ctx.stroke();
 
             verticesElasticos.forEach(idx => {
-                ctx.beginPath(); ctx.arc(pinos[idx].x, pinos[idx].y, 10, 0, Math.PI * 2);
-                ctx.fillStyle = '#e74c3c'; ctx.fill();
+                ctx.beginPath();
+                ctx.arc(pinos[idx].x, pinos[idx].y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = '#e74c3c';
+                ctx.fill();
             });
 
             pinos.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
-                ctx.fillStyle = '#2c3e50'; ctx.fill();
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.raio, 0, Math.PI * 2);
+                ctx.fillStyle = '#2c3e50';
+                ctx.fill();
             });
         }
-        
-        // Mantive a lógica de arrasto, apenas simplifiquei a chamada
-        configurarForma('triangulo', document.getElementById('btn-triangulo'));
+
+        function obterCoordenadas(e) {
+            const rect = canvas.getBoundingClientRect();
+            // Verifica se é toque ou clique
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        }
+
+        function iniciarArrasto(e) {
+            const pos = obterCoordenadas(e);
+            verticesElasticos.forEach((pinoIdx, i) => {
+                const p = pinos[pinoIdx];
+                if (Math.hypot(pos.x - p.x, pos.y - p.y) < 30) verticeArrastadoIndex = i;
+            });
+        }
+
+        function arrastar(e) {
+            if (verticeArrastadoIndex === null) return;
+            const pos = obterCoordenadas(e);
+            let maisProximo = 0, menorDist = Infinity;
+            pinos.forEach((p, i) => {
+                const d = Math.hypot(pos.x - p.x, pos.y - p.y);
+                if (d < menorDist) { menorDist = d; maisProximo = i; }
+            });
+            if (menorDist < 60) {
+                verticesElasticos[verticeArrastadoIndex] = maisProximo;
+                desenharGeoplano();
+            }
+        }
+
+        // Eventos Unificados
+        canvas.addEventListener('mousedown', iniciarArrasto);
+        window.addEventListener('mousemove', arrastar);
+        window.addEventListener('mouseup', () => verticeArrastadoIndex = null);
+
+        canvas.addEventListener('touchstart', (e) => {
+            iniciarArrasto(e);
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (verticeArrastadoIndex !== null) e.preventDefault(); // Bloqueia scroll apenas ao arrastar
+            arrastar(e);
+        }, { passive: false });
+
+        configurarForma('triangulo');
     </script>
 </body>
 </html>
