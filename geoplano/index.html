@@ -62,7 +62,7 @@
 <body>
 
     <h1>Geoplano Multi-Formas</h1>
-    <p>Selecione uma forma e arraste os pontos vermelhos.</p>
+    <p>Selecione uma das formas abaixo para gerar o elástico correspondente. Em seguida, clique e arraste as pontas vermelhas para investigar novas propriedades geométricas.</p>
     
     <div class="panel-controle">
         <button class="btn-forma active" onclick="configurarForma('triangulo')">Triângulo</button>
@@ -74,7 +74,7 @@
     <canvas id="tabuleiro" width="400" height="400"></canvas>
 
     <div class="instrucoes">
-        <strong>Exploração:</strong> Vértices ativos: <span id="num-pontos-txt">3</span>.
+        <strong>Exploração Ativa:</strong> O elástico atual possui <span id="num-pontos-txt" class="status-forma">3</span> vértices. Arraste qualquer ponta para mudar as dimensões e estimar a área.
     </div>
 
     <script>
