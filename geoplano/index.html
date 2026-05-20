@@ -266,13 +266,17 @@
         }
 
         // Mapeamento de Eventos Unificados
+        // Mapeamento de Eventos Unificados - APONTANDO PARA O CANVAS
         canvas.addEventListener('mousedown', iniciarArrasto);
-        window.addEventListener('mousemove', arrastar);
-        window.addEventListener('mouseup', finalizarArrasto);
-
+        canvas.addEventListener('mousemove', arrastar);
+        canvas.addEventListener('mouseup', finalizarArrasto);
+        canvas.addEventListener('mouseleave', finalizarArrasto); // Importante para o mouse sair do canvas
+        
+        // Eventos de toque vinculados ao canvas
         canvas.addEventListener('touchstart', iniciarArrasto, { passive: false });
-        window.addEventListener('touchmove', arrastar, { passive: false });
-        window.addEventListener('touchend', finalizarArrasto);
+        canvas.addEventListener('touchmove', arrastar, { passive: false });
+        canvas.addEventListener('touchend', finalizarArrasto, { passive: false });
+        canvas.addEventListener('touchcancel', finalizarArrasto, { passive: false });
 
         // Inicialização do simulador com o Triângulo Padrão ativo
         configurarForma('triangulo');
