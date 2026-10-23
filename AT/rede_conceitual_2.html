@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <title>Estrutura Conceitual 2: Calor, Cotidiano e Escravidão</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fafafa;
+    }
+    #header {
+      padding: 14px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    #header h2 {
+      margin: 0 0 4px 0;
+      font-size: 18px;
+      color: #1a202c;
+    }
+    #header p {
+      margin: 0;
+      font-size: 13px;
+      color: #718096;
+    }
+    #mynetwork {
+      width: 100vw;
+      height: calc(100vh - 75px);
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h2>Estrutura Conceitual 2: Termodinâmica, Trabalho e Sociedade Colonial</h2>
+    <p>Rede interativa de coocorrência conceitual estilo <i>bibliometrix / visNetwork</i>.</p>
+  </div>
+  <div id="mynetwork"></div>
+
+  <script type="text/javascript">
+    const nodes = new vis.DataSet([{"id": "fogo", "label": "FOGO", "value": 1, "title": "<b>FOGO</b><br>Frequência: 1<br>Cluster: 1", "color": {"background": "#E41A1C", "border": "#2B2B2B", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 15, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "escravizados", "label": "ESCRAVIZADOS", "value": 2, "title": "<b>ESCRAVIZADOS</b><br>Frequência: 2<br>Cluster: 1", "color": {"background": "#E41A1C", "border": "#2B2B2B", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "comida/alimento", "label": "COMIDA/ALIMENTO", "value": 3, "title": "<b>COMIDA/ALIMENTO</b><br>Frequência: 3<br>Cluster: 1", "color": {"background": "#E41A1C", "border": "#2B2B2B", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "sol", "label": "SOL", "value": 5, "title": "<b>SOL</b><br>Frequência: 5<br>Cluster: 2", "color": {"background": "#377EB8", "border": "#2B2B2B", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 24, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "curtume/couro", "label": "CURTUME/COURO", "value": 2, "title": "<b>CURTUME/COURO</b><br>Frequência: 2<br>Cluster: 2", "color": {"background": "#377EB8", "border": "#2B2B2B", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "casa", "label": "CASA", "value": 2, "title": "<b>CASA</b><br>Frequência: 2<br>Cluster: 2", "color": {"background": "#377EB8", "border": "#2B2B2B", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "temperatura", "label": "TEMPERATURA", "value": 3, "title": "<b>TEMPERATURA</b><br>Frequência: 3<br>Cluster: 3", "color": {"background": "#4DAF4A", "border": "#2B2B2B", "highlight": {"background": "#4DAF4A", "border": "#000000"}, "hover": {"background": "#4DAF4A", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "convecção", "label": "CONVECÇÃO", "value": 2, "title": "<b>CONVECÇÃO</b><br>Frequência: 2<br>Cluster: 4", "color": {"background": "#984EA3", "border": "#2B2B2B", "highlight": {"background": "#984EA3", "border": "#000000"}, "hover": {"background": "#984EA3", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "radiação", "label": "RADIAÇÃO", "value": 3, "title": "<b>RADIAÇÃO</b><br>Frequência: 3<br>Cluster: 4", "color": {"background": "#984EA3", "border": "#2B2B2B", "highlight": {"background": "#984EA3", "border": "#000000"}, "hover": {"background": "#984EA3", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "energia", "label": "ENERGIA", "value": 2, "title": "<b>ENERGIA</b><br>Frequência: 2<br>Cluster: 3", "color": {"background": "#4DAF4A", "border": "#2B2B2B", "highlight": {"background": "#4DAF4A", "border": "#000000"}, "hover": {"background": "#4DAF4A", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "calor", "label": "CALOR", "value": 4, "title": "<b>CALOR</b><br>Frequência: 4<br>Cluster: 3", "color": {"background": "#4DAF4A", "border": "#2B2B2B", "highlight": {"background": "#4DAF4A", "border": "#000000"}, "hover": {"background": "#4DAF4A", "border": "#000000"}}, "font": {"size": 21, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "aquecer", "label": "AQUECER", "value": 1, "title": "<b>AQUECER</b><br>Frequência: 1<br>Cluster: 7", "color": {"background": "#A65628", "border": "#2B2B2B", "highlight": {"background": "#A65628", "border": "#000000"}, "hover": {"background": "#A65628", "border": "#000000"}}, "font": {"size": 15, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "quente", "label": "QUENTE", "value": 2, "title": "<b>QUENTE</b><br>Frequência: 2<br>Cluster: 8", "color": {"background": "#F781BF", "border": "#2B2B2B", "highlight": {"background": "#F781BF", "border": "#000000"}, "hover": {"background": "#F781BF", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "vida difícil", "label": "VIDA DIFÍCIL", "value": 1, "title": "<b>VIDA DIFÍCIL</b><br>Frequência: 1<br>Cluster: 5", "color": {"background": "#FF7F00", "border": "#2B2B2B", "highlight": {"background": "#FF7F00", "border": "#000000"}, "hover": {"background": "#FF7F00", "border": "#000000"}}, "font": {"size": 15, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "brasil colonial", "label": "BRASIL COLONIAL", "value": 3, "title": "<b>BRASIL COLONIAL</b><br>Frequência: 3<br>Cluster: 5", "color": {"background": "#FF7F00", "border": "#2B2B2B", "highlight": {"background": "#FF7F00", "border": "#000000"}, "hover": {"background": "#FF7F00", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "cozinha", "label": "COZINHA", "value": 2, "title": "<b>COZINHA</b><br>Frequência: 2<br>Cluster: 1", "color": {"background": "#E41A1C", "border": "#2B2B2B", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "fogão a lenha", "label": "FOGÃO A LENHA", "value": 1, "title": "<b>FOGÃO A LENHA</b><br>Frequência: 1<br>Cluster: 6", "color": {"background": "#FFFF33", "border": "#2B2B2B", "highlight": {"background": "#FFFF33", "border": "#000000"}, "hover": {"background": "#FFFF33", "border": "#000000"}}, "font": {"size": 15, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "barro", "label": "BARRO", "value": 1, "title": "<b>BARRO</b><br>Frequência: 1<br>Cluster: 6", "color": {"background": "#FFFF33", "border": "#2B2B2B", "highlight": {"background": "#FFFF33", "border": "#000000"}, "hover": {"background": "#FFFF33", "border": "#000000"}}, "font": {"size": 15, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "fogo de chão", "label": "FOGO DE CHÃO", "value": 2, "title": "<b>FOGO DE CHÃO</b><br>Frequência: 2<br>Cluster: 1", "color": {"background": "#E41A1C", "border": "#2B2B2B", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 17, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}]);
+    const edges = new vis.DataSet([{"from": "fogo", "to": "comida/alimento", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "fogo", "to": "escravizados", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "escravizados", "to": "comida/alimento", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "escravizados", "to": "sol", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "comida/alimento", "to": "sol", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "comida/alimento", "to": "cozinha", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "comida/alimento", "to": "fogo de chão", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "sol", "to": "casa", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "sol", "to": "curtume/couro", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "curtume/couro", "to": "casa", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "casa", "to": "fogo de chão", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "temperatura", "to": "calor", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "temperatura", "to": "energia", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "convecção", "to": "radiação", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "energia", "to": "calor", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida difícil", "to": "brasil colonial", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "cozinha", "to": "fogo de chão", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "fogão a lenha", "to": "barro", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#111111", "opacity": 0.65}, "smooth": {"type": "continuous"}}]);
+
+    const container = document.getElementById('mynetwork');
+    const data = { nodes: nodes, edges: edges };
+
+    const options = {
+      nodes: {
+        shape: 'dot',
+        scaling: {
+          min: 16,
+          max: 44
+        }
+      },
+      edges: {
+        scaling: {
+          min: 1.5,
+          max: 6
+        },
+        smooth: {
+          enabled: true,
+          type: 'continuous'
+        }
+      },
+      physics: {
+        barnesHut: {
+          gravitationalConstant: -3800,
+          centralGravity: 0.3,
+          springLength: 140,
+          springConstant: 0.04,
+          damping: 0.09
+        },
+        stabilization: {
+          iterations: 200
+        }
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 150,
+        navigationButtons: true,
+        keyboard: true,
+        zoomView: true,
+        dragNodes: true
+      }
+    };
+
+    const network = new vis.Network(container, data, options);
+  </script>
+</body>
+</html>
