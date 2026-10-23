@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <title>Estrutura Conceitual - Representações Infantis (Estilo bibliometrix)</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fafafa;
+    }
+    #header {
+      padding: 14px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    #header h2 {
+      margin: 0 0 4px 0;
+      font-size: 18px;
+      color: #222222;
+    }
+    #header p {
+      margin: 0;
+      font-size: 13px;
+      color: #666666;
+    }
+    #mynetwork {
+      width: 100vw;
+      height: calc(100vh - 75px);
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h2>Estrutura Conceitual: Rede de Coocorrência (Século XVIII)</h2>
+    <p>Rede interativa gerada a partir dos registos e desenhos das crianças (Estilo <i>bibliometrix / visNetwork</i>).</p>
+  </div>
+  <div id="mynetwork"></div>
+
+  <script type="text/javascript">
+    const nodes = new vis.DataSet([{"id": "plantar", "label": "PLANTAR", "value": 1, "title": "<b>PLANTAR</b><br>Frequência: 1<br>Comunidade: 2", "color": {"background": "#377EB8", "border": "#333333", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 16, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "trabalho", "label": "TRABALHO", "value": 5, "title": "<b>TRABALHO</b><br>Frequência: 5<br>Comunidade: 2", "color": {"background": "#377EB8", "border": "#333333", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 26, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "comer/alimento", "label": "COMER/ALIMENTO", "value": 2, "title": "<b>COMER/ALIMENTO</b><br>Frequência: 2<br>Comunidade: 2", "color": {"background": "#377EB8", "border": "#333333", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "vida simples", "label": "VIDA SIMPLES", "value": 6, "title": "<b>VIDA SIMPLES</b><br>Frequência: 6<br>Comunidade: 1", "color": {"background": "#E41A1C", "border": "#333333", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 29, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "vida difícil", "label": "VIDA DIFÍCIL", "value": 2, "title": "<b>VIDA DIFÍCIL</b><br>Frequência: 2<br>Comunidade: 1", "color": {"background": "#E41A1C", "border": "#333333", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "fogão a lenha", "label": "FOGÃO A LENHA", "value": 4, "title": "<b>FOGÃO A LENHA</b><br>Frequência: 4<br>Comunidade: 3", "color": {"background": "#4DAF4A", "border": "#333333", "highlight": {"background": "#4DAF4A", "border": "#000000"}, "hover": {"background": "#4DAF4A", "border": "#000000"}}, "font": {"size": 24, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "barro", "label": "BARRO", "value": 1, "title": "<b>BARRO</b><br>Frequência: 1<br>Comunidade: 3", "color": {"background": "#4DAF4A", "border": "#333333", "highlight": {"background": "#4DAF4A", "border": "#000000"}, "hover": {"background": "#4DAF4A", "border": "#000000"}}, "font": {"size": 16, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "fogo de chão", "label": "FOGO DE CHÃO", "value": 3, "title": "<b>FOGO DE CHÃO</b><br>Frequência: 3<br>Comunidade: 1", "color": {"background": "#E41A1C", "border": "#333333", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 21, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "campo/rural", "label": "CAMPO/RURAL", "value": 2, "title": "<b>CAMPO/RURAL</b><br>Frequência: 2<br>Comunidade: 2", "color": {"background": "#377EB8", "border": "#333333", "highlight": {"background": "#377EB8", "border": "#000000"}, "hover": {"background": "#377EB8", "border": "#000000"}}, "font": {"size": 19, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "casa", "label": "CASA", "value": 4, "title": "<b>CASA</b><br>Frequência: 4<br>Comunidade: 1", "color": {"background": "#E41A1C", "border": "#333333", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 24, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}, {"id": "cacimba", "label": "CACIMBA", "value": 1, "title": "<b>CACIMBA</b><br>Frequência: 1<br>Comunidade: 1", "color": {"background": "#E41A1C", "border": "#333333", "highlight": {"background": "#E41A1C", "border": "#000000"}, "hover": {"background": "#E41A1C", "border": "#000000"}}, "font": {"size": 16, "color": "#111111", "strokeWidth": 3, "strokeColor": "#FFFFFF"}, "shadow": true}]);
+    const edges = new vis.DataSet([{"from": "plantar", "to": "comer/alimento", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "plantar", "to": "trabalho", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "trabalho", "to": "comer/alimento", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "trabalho", "to": "vida difícil", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "trabalho", "to": "vida simples", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "trabalho", "to": "campo/rural", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "comer/alimento", "to": "fogo de chão", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida simples", "to": "vida difícil", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida simples", "to": "cacimba", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida simples", "to": "casa", "value": 4, "title": "Coocorrência: 4", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida simples", "to": "fogo de chão", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida difícil", "to": "cacimba", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "vida difícil", "to": "casa", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "fogão a lenha", "to": "barro", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "fogo de chão", "to": "casa", "value": 2, "title": "Coocorrência: 2", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}, {"from": "casa", "to": "cacimba", "value": 1, "title": "Coocorrência: 1", "color": {"color": "#888888", "highlight": "#E41A1C", "hover": "#222222", "opacity": 0.65}, "smooth": {"type": "continuous"}}]);
+
+    const container = document.getElementById('mynetwork');
+    const data = { nodes: nodes, edges: edges };
+
+    const options = {
+      nodes: {
+        shape: 'dot',
+        scaling: {
+          min: 15,
+          max: 45
+        }
+      },
+      edges: {
+        scaling: {
+          min: 1.5,
+          max: 7
+        },
+        smooth: {
+          enabled: true,
+          type: 'continuous'
+        }
+      },
+      physics: {
+        barnesHut: {
+          gravitationalConstant: -3500,
+          centralGravity: 0.35,
+          springLength: 130,
+          springConstant: 0.04,
+          damping: 0.09
+        },
+        stabilization: {
+          iterations: 200
+        }
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 150,
+        navigationButtons: true,
+        keyboard: true,
+        zoomView: true,
+        dragNodes: true
+      }
+    };
+
+    const network = new vis.Network(container, data, options);
+  </script>
+</body>
+</html>
